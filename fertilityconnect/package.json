@@ -1,0 +1,9 @@
+{
+  "name": "fertilityconnect-india",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:api": "cd apps/api && npm run dev",
+    "start:api": "cd apps/api && npm start"
+  }
+}

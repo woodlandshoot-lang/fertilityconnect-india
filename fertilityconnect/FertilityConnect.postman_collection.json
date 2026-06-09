@@ -1,0 +1,377 @@
+{
+  "info": {
+    "name": "FertilityConnect India API",
+    "description": "Complete API collection for FertilityConnect India platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "BASE_URL",          "value": "http://localhost:4000/api" },
+    { "key": "PATIENT_TOKEN",     "value": "" },
+    { "key": "HOSPITAL_TOKEN",    "value": "" },
+    { "key": "ADMIN_TOKEN",       "value": "" },
+    { "key": "HOSPITAL_ID",       "value": "" },
+    { "key": "LEAD_ID",           "value": "" },
+    { "key": "RAZORPAY_ORDER_ID", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "🔐 Auth",
+      "item": [
+        {
+          "name": "Register Patient",
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/auth/register",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"patient\",\n  \"full_name\": \"Priya Sharma\",\n  \"phone\": \"+919876543210\",\n  \"password\": \"Test@1234\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Register Hospital",
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/auth/register",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"hospital\",\n  \"full_name\": \"Dr. Admin\",\n  \"phone\": \"+919876543211\",\n  \"password\": \"Test@1234\",\n  \"hospital_name\": \"Test IVF Clinic\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login Patient",
+          "event": [{
+            "listen": "test",
+            "script": { "exec": ["var r = pm.response.json(); if(r.data) pm.collectionVariables.set('PATIENT_TOKEN', r.data.tokens.accessToken);"] }
+          }],
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"+919999999999\",\n  \"password\": \"Patient@123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login Hospital",
+          "event": [{
+            "listen": "test",
+            "script": { "exec": ["var r = pm.response.json(); if(r.data) { pm.collectionVariables.set('HOSPITAL_TOKEN', r.data.tokens.accessToken); if(r.data.hospital) pm.collectionVariables.set('HOSPITAL_ID', r.data.hospital.id); }"] }
+          }],
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"+919876543210\",\n  \"password\": \"Hospital@123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Send OTP",
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/auth/otp/send",
+            "body": { "mode": "raw", "raw": "{\n  \"phone\": \"+919876543210\"\n}" },
+            "header": [{ "key": "Content-Type", "value": "application/json" }]
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/auth/otp/verify",
+            "body": { "mode": "raw", "raw": "{\n  \"phone\": \"+919876543210\",\n  \"otp\": \"123456\"\n}" },
+            "header": [{ "key": "Content-Type", "value": "application/json" }]
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/user/forgot-password",
+            "body": { "mode": "raw", "raw": "{\n  \"phone\": \"+919876543210\"\n}" },
+            "header": [{ "key": "Content-Type", "value": "application/json" }]
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/user/reset-password",
+            "body": { "mode": "raw", "raw": "{\n  \"phone\": \"+919876543210\",\n  \"otp\": \"123456\",\n  \"new_password\": \"NewPass@123\"\n}" },
+            "header": [{ "key": "Content-Type", "value": "application/json" }]
+          }
+        },
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "url":    "{{BASE_URL}}/auth/me",
+            "header": [{ "key": "Authorization", "value": "Bearer {{PATIENT_TOKEN}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "🏥 Hospitals",
+      "item": [
+        {
+          "name": "List Hospitals",
+          "request": { "method": "GET", "url": "{{BASE_URL}}/hospitals?city=Mumbai&page=1&limit=10" }
+        },
+        {
+          "name": "Search Hospitals",
+          "request": { "method": "GET", "url": "{{BASE_URL}}/hospitals/search?q=IVF Mumbai" }
+        },
+        {
+          "name": "City Landing - Mumbai",
+          "request": { "method": "GET", "url": "{{BASE_URL}}/hospitals/city/Mumbai" }
+        },
+        {
+          "name": "Get Hospital Profile",
+          "request": { "method": "GET", "url": "{{BASE_URL}}/hospitals/nova-ivf-fertility-mumbai" }
+        },
+        {
+          "name": "My Hospital Profile",
+          "request": {
+            "method": "GET",
+            "url":    "{{BASE_URL}}/hospitals/dashboard/profile",
+            "header": [{ "key": "Authorization", "value": "Bearer {{HOSPITAL_TOKEN}}" }]
+          }
+        },
+        {
+          "name": "Update Hospital Profile",
+          "request": {
+            "method": "PUT",
+            "url":    "{{BASE_URL}}/hospitals/dashboard/profile",
+            "header": [
+              { "key": "Authorization",  "value": "Bearer {{HOSPITAL_TOKEN}}" },
+              { "key": "Content-Type",   "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Updated description\",\n  \"ivf_success_rate\": 72.5,\n  \"facilities\": [\"IVF Lab\",\"Counselling\"],\n  \"treatments\": [\"IVF\",\"IUI\",\"ICSI\"]\n}"
+            }
+          }
+        },
+        {
+          "name": "Hospital Analytics",
+          "request": {
+            "method": "GET",
+            "url":    "{{BASE_URL}}/hospitals/dashboard/analytics",
+            "header": [{ "key": "Authorization", "value": "Bearer {{HOSPITAL_TOKEN}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "👤 Leads",
+      "item": [
+        {
+          "name": "Submit Lead (Patient)",
+          "event": [{
+            "listen": "test",
+            "script": { "exec": ["var r = pm.response.json(); if(r.data && r.data.lead) pm.collectionVariables.set('LEAD_ID', r.data.lead.id);"] }
+          }],
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/leads",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{PATIENT_TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"age\": 31,\n  \"condition\": \"Low AMH\",\n  \"budget_min\": 100000,\n  \"budget_max\": 200000,\n  \"city\": \"Mumbai\",\n  \"urgency\": \"within_1_month\",\n  \"name\": \"Priya Sharma\",\n  \"phone\": \"+919876543210\",\n  \"email\": \"priya@test.com\"\n}"
+            }
+          }
+        },
+        {
+          "name": "My Leads (Patient)",
+          "request": {
+            "method": "GET",
+            "url":    "{{BASE_URL}}/leads/my",
+            "header": [{ "key": "Authorization", "value": "Bearer {{PATIENT_TOKEN}}" }]
+          }
+        },
+        {
+          "name": "Available Leads (Hospital)",
+          "request": {
+            "method": "GET",
+            "url":    "{{BASE_URL}}/leads/available?city=Mumbai",
+            "header": [{ "key": "Authorization", "value": "Bearer {{HOSPITAL_TOKEN}}" }]
+          }
+        },
+        {
+          "name": "Get Lead Price",
+          "request": {
+            "method": "GET",
+            "url":    "{{BASE_URL}}/leads/{{LEAD_ID}}/price",
+            "header": [{ "key": "Authorization", "value": "Bearer {{HOSPITAL_TOKEN}}" }]
+          }
+        },
+        {
+          "name": "Create Lead Unlock Order",
+          "event": [{
+            "listen": "test",
+            "script": { "exec": ["var r = pm.response.json(); if(r.data) pm.collectionVariables.set('RAZORPAY_ORDER_ID', r.data.order_id);"] }
+          }],
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/payments/lead-unlock",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{HOSPITAL_TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"lead_id\": \"{{LEAD_ID}}\"\n}" }
+          }
+        },
+        {
+          "name": "Verify Payment",
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/payments/verify",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{HOSPITAL_TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"razorpay_order_id\": \"{{RAZORPAY_ORDER_ID}}\",\n  \"razorpay_payment_id\": \"pay_test_xxx\",\n  \"razorpay_signature\": \"test_sig\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "💳 Payments",
+      "item": [
+        {
+          "name": "Get Plans",
+          "request": { "method": "GET", "url": "{{BASE_URL}}/payments/plans" }
+        },
+        {
+          "name": "Create Subscription Order",
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/payments/subscription",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{HOSPITAL_TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"plan\": \"pro\"\n}" }
+          }
+        },
+        {
+          "name": "Current Subscription",
+          "request": {
+            "method": "GET",
+            "url":    "{{BASE_URL}}/payments/subscription",
+            "header": [{ "key": "Authorization", "value": "Bearer {{HOSPITAL_TOKEN}}" }]
+          }
+        },
+        {
+          "name": "Cancel Subscription",
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/payments/subscription/cancel",
+            "header": [{ "key": "Authorization", "value": "Bearer {{HOSPITAL_TOKEN}}" }]
+          }
+        },
+        {
+          "name": "Featured Listing Upgrade",
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/payments/featured",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{HOSPITAL_TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"months\": 1\n}" }
+          }
+        },
+        {
+          "name": "Payment History",
+          "request": {
+            "method": "GET",
+            "url":    "{{BASE_URL}}/payments/history",
+            "header": [{ "key": "Authorization", "value": "Bearer {{HOSPITAL_TOKEN}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "🛡️ Admin",
+      "item": [
+        {
+          "name": "Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "url":    "{{BASE_URL}}/admin/stats",
+            "header": [{ "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }]
+          }
+        },
+        {
+          "name": "KYC Queue",
+          "request": {
+            "method": "GET",
+            "url":    "{{BASE_URL}}/admin/hospitals/pending?status=pending",
+            "header": [{ "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }]
+          }
+        },
+        {
+          "name": "Approve Hospital KYC",
+          "request": {
+            "method": "POST",
+            "url":    "{{BASE_URL}}/admin/hospitals/{{HOSPITAL_ID}}/verify",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"action\": \"approve\",\n  \"notes\": \"All documents verified\"\n}" }
+          }
+        },
+        {
+          "name": "Review Moderation Queue",
+          "request": {
+            "method": "GET",
+            "url":    "{{BASE_URL}}/admin/reviews/pending",
+            "header": [{ "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }]
+          }
+        },
+        {
+          "name": "Platform Analytics",
+          "request": {
+            "method": "GET",
+            "url":    "{{BASE_URL}}/admin/analytics",
+            "header": [{ "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "🌐 SEO",
+      "item": [
+        {
+          "name": "Sitemap XML",
+          "request": { "method": "GET", "url": "http://localhost:4000/sitemap.xml" }
+        },
+        {
+          "name": "Robots.txt",
+          "request": { "method": "GET", "url": "http://localhost:4000/robots.txt" }
+        },
+        {
+          "name": "Hospital JSON-LD",
+          "request": { "method": "GET", "url": "{{BASE_URL}}/seo/hospital/nova-ivf-fertility-mumbai" }
+        }
+      ]
+    }
+  ]
+}

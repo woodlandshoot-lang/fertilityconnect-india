@@ -1,0 +1,78 @@
+# docker-compose.yml
+# Local development: API + PostgreSQL + pgAdmin
+
+version: '3.9'
+
+services:
+
+  # ── PostgreSQL Database ──────────────────────────────────────
+  postgres:
+    image: postgres:15-alpine
+    container_name: fc_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       fertilityconnect
+      POSTGRES_USER:     fcuser
+      POSTGRES_PASSWORD: fcpassword123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fcuser -d fertilityconnect"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── API Server ───────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: fc_api
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV:              development
+      PORT:                  4000
+      DATABASE_URL:          postgresql://fcuser:fcpassword123@postgres:5432/fertilityconnect
+      JWT_SECRET:            dev_jwt_secret_change_in_production_32chars
+      JWT_REFRESH_SECRET:    dev_refresh_secret_change_in_production_32chars
+      ENCRYPTION_KEY:        dev_encryption_key_32bytes_hex_00
+      RAZORPAY_KEY_ID:       rzp_test_placeholder
+      RAZORPAY_KEY_SECRET:   placeholder_secret
+      RAZORPAY_WEBHOOK_SECRET: placeholder_webhook
+      FRONTEND_URL:          http://localhost:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:4000/health', r => process.exit(r.statusCode===200?0:1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── pgAdmin (DB GUI) ─────────────────────────────────────────
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: fc_pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL:    admin@fertilityconnect.in
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  default:
+    name: fertilityconnect_network
