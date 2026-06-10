@@ -54,7 +54,7 @@ const createSubscriptionOrder = async (req, res) => {
     // Create Razorpay order
     const order = await createOrder({
       amount:  planConfig.amount,
-      receipt: `sub_${hospital.id}_${Date.now()}`,
+      receipt: `sub_${Date.now()}`,
       notes:   { hospital_id: hospital.id, plan, hospital_name: hospital.name },
     });
 
