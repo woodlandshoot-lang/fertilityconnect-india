@@ -551,8 +551,8 @@ function renderHospitalOB(el) {
       '<h3 style="font-size:20px;font-weight:700;margin-bottom:5px;text-align:center">Choose Your Plan</h3>' +
       '<p style="font-size:13px;color:var(--ink60);text-align:center;margin-bottom:18px">Start with a 7-day free trial on any plan</p>' +
       planHtml + '</div>';
-    var selPlanName = S.obPlan.charAt(0).toUpperCase() + S.obPlan.slice(1);
-    footer = '<button class="btn btn-p fw lg" onclick="obNext()">Continue with ' + selPlanName + ' →</button>' +
+    var (selPlanName||'Pro') = S.obPlan.charAt(0).toUpperCase() + S.obPlan.slice(1);
+    footer = '<button class="btn btn-p fw lg" onclick="obNext()">Continue with ' + (selPlanName||'Pro') + ' →</button>' +
       '<p style="font-size:10px;color:var(--ink60);text-align:center;margin-top:8px">7-day free trial · Cancel anytime · Secured by Razorpay</p>';
 
   } else {
@@ -568,7 +568,7 @@ function renderHospitalOB(el) {
       '<div class="fg"><label class="fl">City *</label><select class="fi" onchange="S.obCity=this.value">' + cityOpts + '</select></div>' +
       '<div class="fg"><label class="fl">IVF Success Rate (approx. %)</label><input class="fi" type="number" placeholder="e.g. 68" min="1" max="100"><div class="fhint">Will be verified by our team before publishing</div></div>' +
       '<div class="fg"><label class="fl">Number of Specialists</label><select class="fi"><option>1–2</option><option>3–5</option><option>6–10</option><option>10+</option></select></div>' +
-      '<div class="ibox ib-g" style="margin-top:4px">🎉 You get 7 free days on the ' + selPlanName + ' plan. Upload KYC docs after registration.</div>' +
+      '<div class="ibox ib-g" style="margin-top:4px">🎉 You get 7 free days on the ' + (selPlanName||'Pro') + ' plan. Upload KYC docs after registration.</div>' +
       '</div>';
     footer = '<button class="btn btn-t fw lg" onclick="finishHospitalOB()">🚀 Launch My Listing →</button>';
   }
