@@ -1304,7 +1304,7 @@ window.finishPatientOB = async function() {
   if (S.obPhone && S.obName) {
     try {
       const data = await apiFetch('POST', '/auth/register', {
-        role:'patient', full_name:S.obName, phone:S.obPhone,
+        role:'patient', full_name:S.obName, phone:S.obPhone.replace(/\s+/g,''),
         password:'Temp@' + S.obPhone.slice(-4) + '1A',
       });
       Token.set(data.data.tokens.accessToken, data.data.tokens.refreshToken);
@@ -1325,7 +1325,7 @@ window.finishHospitalOB = async function() {
   if (S.obPhone && S.obName) {
     try {
       const data = await apiFetch('POST', '/auth/register', {
-        role:'hospital', full_name:S.obName, phone:S.obPhone,
+        role:'hospital', full_name:S.obName, phone:S.obPhone.replace(/\s+/g,''),
         password:'Temp@' + S.obPhone.slice(-4) + '1A',
         hospital_name: S.obHospName || 'My Clinic',
       });
