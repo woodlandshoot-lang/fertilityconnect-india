@@ -1389,7 +1389,7 @@ console.log('%c✅ FertilityConnect API Layer Ready', 'color:#0B7B6E;font-weight
   showToast('🚀 Redirecting to payment...');
   try {
     var plan = S.planSel || 'pro';
-    var res = await apiFetch('POST', '/payments/create-order', { plan: plan }, true);
+    var res = await apiFetch('POST', '/payments/subscription', { plan: plan }, true);
     if (res && res.order_id) {
       var options = {
         key: 'rzp_live_SzvNOHe1T7fOjt',
