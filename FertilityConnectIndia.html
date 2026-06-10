@@ -1384,7 +1384,33 @@ window.submitConsultAPI = async function(formData) {
 };
 
 console.log('%c✅ FertilityConnect API Layer Ready', 'color:#0B7B6E;font-weight:bold;font-size:13px');
-console.log('%c📡 Backend: ' + API_BASE, 'color:#E8722A;font-size:12px');
+
+  async function initPayment() {
+  showToast('🚀 Redirecting to payment...');
+  try {
+    var plan = S.planSel || 'pro';
+    var res = await apiFetch('POST', '/payments/create-order', { plan: plan }, true);
+    if (res && res.order_id) {
+      var options = {
+        key: 'rzp_live_SzvNOHe1T7fOjt',
+        amount: res.amount,
+        currency: 'INR',
+        name: 'FertilityConnect India',
+        description: plan.charAt(0).toUpperCase() + plan.slice(1) + ' Plan',
+        order_id: res.order_id,
+        handler: async function(response) {
+          showToast('✅ Payment successful!');
+          S.user.plan = plan;
+          render();
+        },
+        prefill: { name: S.user ? S.user.name : '', contact: S.user ? S.user.phone : '' },
+        theme: { color: '#E8722A' }
+      };
+      var rzp = new Razorpay(options);
+      rzp.open();
+    }
+  } catch(e) { showToast('❌ Payment failed. Try again.'); }
+}
 </script>
 </body>
 </html>
