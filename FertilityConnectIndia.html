@@ -1155,7 +1155,7 @@ function renderPlans() {
   }
   var selPlanPrice = '';
   for (var i = 0; i < plans.length; i++) { if (plans[i].id === S.planSel) { selPlanPrice = plans[i].price; break; } }
-  html += '<button class="btn btn-p fw lg" style="margin-top:4px" onclick="showToast(\'🚀 Redirecting to payment...\')">🚀 Upgrade — ' + selPlanPrice + '/mo</button>' +
+  html += '<button class="btn btn-p fw lg" style="margin-top:4px" onclick="initPayment()">🚀 Upgrade — ' + selPlanPrice + '/mo</button>' +
     '<p style="font-size:10px;color:var(--ink60);text-align:center;margin-top:8px">GST applicable · Cancel anytime · Secured by Razorpay</p>' +
   '</div>';
   return html;
