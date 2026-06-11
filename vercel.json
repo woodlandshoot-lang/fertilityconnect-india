@@ -1,1 +1,14 @@
-{"version":2,"routes":[{"src":"/(.*)","dest":"/FertilityConnectIndia.html"}]}
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache" }
+      ]
+    }
+  ]
+}
