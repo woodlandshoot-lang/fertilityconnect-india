@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="description" content="FERTY9 — India's most trusted fertility hospital platform.">
+<meta name="theme-color" content="#000000" id="theme-color-meta">
+<meta property="og:title" content="FERTY9 — Your Journey to Parenthood Starts Here">
+<title>FERTY9 — Fertility Hospital Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Bricolage+Grotesque:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#0ea5e9;--brand-dim:rgba(14,165,233,.15);
+  --rose:#f43f5e;--green:#10b981;
+  --r:14px;--rl:20px;--rxl:26px;
+}
+
+/* ── DARK MODE (default) ── */
+:root,html[data-theme="dark"]{
+  --black:#000;--white:#fff;--off-white:#f0ede8;
+  --g9:#0a0a0a;--g8:#111;--g7:#1a1a1a;--g6:#222;
+  --text:#f0ede8;--td:rgba(240,237,232,.55);--tm:rgba(240,237,232,.28);
+  --b:rgba(255,255,255,.08);--bb:rgba(255,255,255,.15);
+  --page-bg:#000;
+  --hdr-bg:rgba(0,0,0,.75);
+  --card-bg:#111;--card-bg2:#1a1a1a;
+  --input-bg:#1a1a1a;--input-border:rgba(255,255,255,.08);
+  --bnav-bg:rgba(0,0,0,.94);
+}
+
+/* ── LIGHT MODE ── */
+html[data-theme="light"]{
+  --black:#ffffff;--white:#0a0a0a;--off-white:#1a1a1a;
+  --g9:#f8f9fa;--g8:#ffffff;--g7:#f0f2f5;--g6:#e8eaed;
+  --text:#0a0a0a;--td:rgba(10,10,10,.65);--tm:rgba(10,10,10,.4);
+  --b:rgba(0,0,0,.08);--bb:rgba(0,0,0,.15);
+  --page-bg:#f0f2f5;
+  --hdr-bg:rgba(255,255,255,.9);
+  --card-bg:#ffffff;--card-bg2:#f8f9fa;
+  --input-bg:#f0f2f5;--input-border:rgba(0,0,0,.12);
+  --bnav-bg:rgba(255,255,255,.96);
+}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',sans-serif;background:var(--page-bg,var(--black));color:var(--text);transition:background .3s,color .3s;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;touch-action:manipulation}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--brand);border-radius:2px}
+
+/* HEADER */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:var(--hdr-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--b);transition:background .3s,border-color .3s}
+.hdr.scrolled{background:var(--hdr-bg)}
+.logo{display:flex;align-items:center;gap:8px}
+.logo-icon{width:30px;height:30px;border-radius:8px;background:var(--white);display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:16px;height:16px}
+.logo-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-1.5px;color:var(--text);display:flex;align-items:center}
+.logo-box{width:20px;height:20px;background:var(--white);color:var(--black);border-radius:5px;font-size:12px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;margin-left:2px}
+.hdr-btns{display:flex;gap:6px}
+.btn-hs{padding:7px 14px;border-radius:9px;font-size:13px;font-weight:600;color:var(--td);background:transparent;border:1px solid transparent;transition:all .15s}
+.btn-hs:active{background:var(--b);color:var(--text)}
+.btn-ho{padding:7px 16px;border-radius:9px;font-size:13px;font-weight:700;color:var(--white);background:transparent;border:1px solid var(--bb);transition:all .15s}
+.btn-ho:active{background:var(--b)}
+
+/* PAGE SYSTEM */
+.page{display:none;padding-top:60px;padding-bottom:76px;min-height:100vh}
+.page.active{display:block;animation:pageIn .2s ease-out}
+@keyframes pageIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--bnav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--b);display:flex;padding:7px 0 max(7px,env(safe-area-inset-bottom));transition:background .3s}
+.bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;cursor:pointer;transition:all .15s}
+.bi-icon{font-size:20px;line-height:1;transition:transform .2s}
+.bi-label{font-size:10px;font-weight:500;color:var(--tm)}
+.bi.active .bi-label{color:var(--brand);font-weight:700}
+.bi.active .bi-icon{transform:scale(1.1)}
+.bi-badge{position:absolute;top:-2px;right:-4px;background:var(--rose);color:#fff;border-radius:100px;font-size:9px;font-weight:700;padding:1px 5px;min-width:15px;text-align:center}
+
+/* WA FLOAT */
+.waf{position:fixed;bottom:84px;right:14px;z-index:90;width:48px;height:48px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:21px;box-shadow:0 4px 18px rgba(37,211,102,.45);transition:all .2s}
+.waf:active{transform:scale(.94)}
+
+/* TOAST */
+.toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%) translateY(14px);background:var(--g8);border:1px solid var(--bb);color:var(--text);padding:11px 18px;border-radius:12px;font-size:13px;font-weight:500;z-index:300;transition:all .25s;opacity:0;pointer-events:none;white-space:nowrap;max-width:88vw;box-shadow:0 8px 32px rgba(0,0,0,.6)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* COMMONS */
+.container{padding:0 16px}
+.tag{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:600;letter-spacing:.02em}
+.tag-b{background:rgba(14,165,233,.12);color:#38bdf8;border:1px solid rgba(14,165,233,.2)}
+.tag-g{background:rgba(16,185,129,.12);color:#34d399;border:1px solid rgba(16,185,129,.2)}
+.tag-o{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.btn-white{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--white);color:var(--black);padding:14px 20px;border-radius:var(--r);font-size:15px;font-weight:700;width:100%;border:none;transition:all .2s}
+.btn-white:active{transform:scale(.98);background:var(--off-white)}
+.btn-outline{display:flex;align-items:center;justify-content:center;gap:7px;background:transparent;color:var(--text);padding:13px 20px;border-radius:var(--r);font-size:14px;font-weight:600;width:100%;border:1px solid var(--bb);transition:all .2s}
+.btn-outline:active{background:var(--b)}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.25);color:#4ade80;padding:11px 14px;border-radius:var(--r);font-size:13px;font-weight:600;transition:all .2s}
+.btn-wa:active{background:rgba(37,211,102,.2)}
+.btn-book-dark{display:flex;align-items:center;justify-content:center;background:var(--white);color:var(--black);padding:11px 14px;border-radius:var(--r);font-size:13px;font-weight:700;transition:all .2s;border:none}
+.btn-book-dark:active{transform:scale(.98);background:var(--off-white)}
+.form-input{width:100%;padding:12px 14px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:var(--r);font-size:15px;font-family:inherit;color:var(--text);outline:none;transition:all .15s;-webkit-appearance:none;appearance:none}
+.form-input:focus{border-color:rgba(14,165,233,.5);background:var(--g6,#e8eaed);box-shadow:0 0 0 3px rgba(14,165,233,.08)}
+select.form-input option{background:var(--g7);color:var(--text)}
+.form-label{display:block;font-size:11px;font-weight:700;color:var(--tm);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+.form-group{margin-bottom:15px}
+.hdivider{height:1px;background:linear-gradient(90deg,transparent,var(--bb),transparent)}
+
+/* HERO */
+.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:90px 20px 80px}
+.hero-orb1{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(14,165,233,.2) 0%,transparent 70%);top:-80px;left:-120px;pointer-events:none;animation:orb1Float 9s ease-in-out infinite}
+.hero-orb2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(244,63,94,.13) 0%,transparent 70%);bottom:-40px;right:-80px;pointer-events:none;animation:orb2Float 11s ease-in-out infinite}
+@keyframes orb1Float{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-25px)}}
+@keyframes orb2Float{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,30px)}}
+.hero-inner{position:relative;z-index:1;text-align:center;width:100%}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--brand-dim);border:1px solid rgba(14,165,233,.3);color:var(--brand);border-radius:100px;padding:5px 13px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px}
+.eyebrow-dot{width:5px;height:5px;background:var(--brand);border-radius:50%;animation:pdot 2s infinite}
+@keyframes pdot{0%,100%{opacity:1}50%{opacity:.25}}
+.hero-title{font-size:clamp(46px,11vw,78px);font-weight:800;line-height:1.0;letter-spacing:-4px;color:var(--white);margin-bottom:18px}
+.hero-title .hl{background:linear-gradient(135deg,var(--brand),#38bdf8,#7dd3fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:16px;color:var(--td);line-height:1.7;margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto}
+.hero-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:40px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border-radius:var(--r);overflow:hidden;border:1px solid var(--b)}
+.hs{background:rgba(255,255,255,.03);padding:15px 8px;text-align:center;backdrop-filter:blur(8px)}
+.hs-val{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--white);letter-spacing:-1px}
+.hs-label{font-size:9px;color:var(--tm);margin-top:3px;text-transform:uppercase;letter-spacing:.06em}
+.scroll-cue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px}
+.sc-text{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--tm)}
+.sc-line{width:1px;height:28px;background:linear-gradient(to bottom,transparent,var(--brand));animation:scl 2s ease-in-out infinite}
+@keyframes scl{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* NUMBERS */
+.nums{padding:0;background:linear-gradient(180deg,rgba(14,165,233,.05),transparent)}
+.nums-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--b)}
+.nc{background:var(--black);padding:26px 16px;text-align:center}
+.nc-val{font-family:'Bricolage Grotesque',sans-serif;font-size:34px;font-weight:800;letter-spacing:-2px;color:var(--white)}
+.nc-val span{color:var(--brand)}
+.nc-label{font-size:11px;color:var(--tm);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
+
+/* HOSPITAL CARDS */
+.hcards-list{display:flex;flex-direction:column;gap:2px;margin-top:24px;border-radius:var(--rl);overflow:hidden;border:1px solid var(--b)}
+.hcard{background:var(--card-bg);padding:18px;border-left:3px solid transparent;transition:border-color .2s,background .2s;cursor:pointer;position:relative}
+.hcard:active{background:var(--g7);border-left-color:var(--brand)}
+.hcard+.hcard{border-top:1px solid var(--b)}
+.hcard-row{display:flex;gap:12px;align-items:flex-start}
+.hcard-num{font-size:10px;font-weight:700;color:var(--tm);width:18px;flex-shrink:0;padding-top:3px}
+.hcard-logo{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:17px}
+.hcard-body{flex:1;min-width:0}
+.hcard-name{font-size:15px;font-weight:700;color:var(--white);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hcard-city{font-size:11px;color:var(--tm);margin-bottom:7px}
+.hcard-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px}
+.hcard-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:11px}
+.hm{background:rgba(255,255,255,.04);border:1px solid var(--b);border-radius:9px;padding:8px 5px;text-align:center}
+.hm-val{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:800;color:var(--white);letter-spacing:-.5px}
+.hm-val.g{color:#34d399}.hm-val.b{color:#38bdf8}
+.hm-label{font-size:9px;color:var(--tm);margin-top:2px;text-transform:uppercase;letter-spacing:.03em}
+.hcard-actions{display:grid;grid-template-columns:1fr auto auto;gap:7px}
+.btn-fav{width:38px;height:38px;background:rgba(255,255,255,.06);border:1px solid var(--b);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .15s;flex-shrink:0}
+.btn-fav:active{background:rgba(244,63,94,.15);border-color:rgba(244,63,94,.3);color:#f87171}
+.btn-wa-sm{width:38px;height:38px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+
+/* TREATMENT GRID */
+.trt-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:24px;border-radius:var(--rl);overflow:hidden;border:1px solid var(--b);background:var(--b)}
+.trt{background:var(--card-bg2);padding:18px 14px;cursor:pointer;transition:background .15s;position:relative}
+.trt:active{background:var(--g8)}
+.trt-em{font-size:26px;margin-bottom:8px}
+.trt-name{font-size:14px;font-weight:700;color:var(--white);margin-bottom:3px;letter-spacing:-.2px}
+.trt-stat{font-size:11px;color:var(--tm)}
+.trt-arr{position:absolute;top:14px;right:12px;font-size:13px;color:var(--tm)}
+
+/* HOW IT WORKS */
+.step{display:flex;gap:14px;padding:20px 0;border-bottom:1px solid var(--b)}
+.step:last-child{border-bottom:none}
+.step-n{width:34px;height:34px;border-radius:10px;background:var(--g8);border:1px solid var(--bb);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:800;color:var(--white);flex-shrink:0}
+.step-title{font-size:16px;font-weight:700;color:var(--white);margin-bottom:4px;letter-spacing:-.3px}
+.step-desc{font-size:13px;color:var(--td);line-height:1.6}
+.step-icon{font-size:20px;align-self:center;flex-shrink:0;margin-left:auto}
+
+/* TESTIMONIALS */
+.tcard{background:var(--g8);border:1px solid var(--b);border-radius:var(--rl);padding:22px;margin-bottom:10px;position:relative;overflow:hidden}
+.tcard::before{content:'"';position:absolute;top:-8px;right:14px;font-size:72px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:rgba(14,165,233,.07);line-height:1}
+.tcard-stars{color:#fbbf24;font-size:13px;letter-spacing:2px;margin-bottom:8px}
+.tcard-text{font-size:14px;color:var(--td);line-height:1.7;margin-bottom:14px;font-style:italic}
+.tcard-author{display:flex;align-items:center;gap:10px}
+.tcard-av{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:var(--black);flex-shrink:0}
+.tcard-name{font-size:13px;font-weight:700;color:var(--white)}
+.tcard-meta{font-size:10px;color:var(--tm);margin-top:1px}
+.outcome{display:inline-flex;align-items:center;gap:3px;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);color:#34d399;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:600;margin-left:auto;white-space:nowrap}
+
+/* CITIES */
+.city-scroll{display:flex;gap:9px;overflow-x:auto;scrollbar-width:none;padding:4px 16px;margin:20px -16px 0}
+.city-scroll::-webkit-scrollbar{display:none}
+.city-chip{flex-shrink:0;background:var(--g8);border:1px solid var(--b);border-radius:var(--r);padding:11px 14px;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:80px;cursor:pointer;transition:all .15s}
+.city-chip:active{background:var(--g7);border-color:var(--bb)}
+.city-em{font-size:22px}
+.city-name{font-size:12px;font-weight:600;color:var(--text);text-align:center}
+.city-cnt{font-size:10px;color:var(--tm)}
+
+/* FOOTER */
+.footer{background:var(--g9);border-top:1px solid var(--b);padding:32px 16px max(32px,calc(76px + env(safe-area-inset-bottom)));display:none}
+.footer-logo{display:flex;align-items:center;gap:7px;margin-bottom:12px}
+.footer-desc{font-size:13px;color:var(--tm);line-height:1.7;margin-bottom:14px}
+.footer-links{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.footer-links a{font-size:12px;color:var(--tm)}
+.footer-contact{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.footer-contact span{font-size:12px;color:var(--tm)}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.12)}
+
+/* SECTION LABEL */
+.sec-eyebrow{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.sec-title{font-size:clamp(26px,6vw,36px);font-weight:800;letter-spacing:-2px;color:var(--white);line-height:1.1;margin-bottom:10px}
+.sec-sub{font-size:14px;color:var(--td);line-height:1.6}
+.section-pad{padding:60px 0}
+
+/* SEARCH PAGE */
+.sp-hdr{background:var(--g9);padding:10px 14px;border-bottom:1px solid var(--b);display:flex;gap:9px;align-items:center}
+.sp-input{flex:1;display:flex;align-items:center;gap:7px;background:var(--g8);border:1px solid var(--b);border-radius:var(--r);padding:10px 13px}
+.sp-input input{border:none;outline:none;background:transparent;font-size:14px;font-family:inherit;flex:1;color:var(--text)}
+.sp-input input::placeholder{color:var(--tm)}
+.filter-btn{display:flex;align-items:center;gap:5px;padding:10px 13px;background:var(--g8);border:1px solid var(--bb);color:var(--text);border-radius:var(--r);font-size:12px;font-weight:600;white-space:nowrap}
+.fcnt{background:var(--brand);color:var(--black);border-radius:5px;padding:1px 5px;font-size:10px;font-weight:800}
+.res-bar{padding:9px 14px;font-size:12px;color:var(--tm);background:var(--black);border-bottom:1px solid var(--b);display:flex;justify-content:space-between;align-items:center}
+.res-bar strong{color:var(--text)}
+.sort-s{font-size:12px;font-weight:600;color:var(--brand);background:none;border:none;font-family:inherit}
+.rcard{background:var(--g9);border:1px solid var(--b);border-radius:var(--rl);padding:15px;cursor:pointer;transition:all .15s}
+.rcard:active{background:var(--g8);border-color:var(--bb)}
+.rcard-top{display:flex;gap:11px;margin-bottom:11px;align-items:flex-start}
+.rcard-logo{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.rcard-name{font-size:15px;font-weight:700;color:var(--white);margin-bottom:2px}
+.rcard-city{font-size:11px;color:var(--tm);margin-bottom:5px}
+.rcard-sr{font-size:22px;font-weight:800;color:#34d399;font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-1px;text-align:right;flex-shrink:0}
+.rcard-sr-label{font-size:9px;color:var(--tm);text-transform:uppercase;letter-spacing:.04em;text-align:right}
+.srbar{display:flex;align-items:center;gap:7px;margin-bottom:11px}
+.srbar-track{flex:1;height:4px;background:var(--g7);border-radius:2px;overflow:hidden}
+.srbar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--green),#34d399)}
+.srbar-label{font-size:9px;color:var(--tm);white-space:nowrap;text-transform:uppercase;letter-spacing:.04em}
+.srbar-val{font-size:11px;font-weight:700;color:#34d399;white-space:nowrap}
+.rcard-mets{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:11px}
+.rm{background:var(--g8);border:1px solid var(--b);border-radius:9px;padding:8px 5px;text-align:center}
+.rm-val{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:800;color:var(--white);letter-spacing:-.3px}
+.rm-label{font-size:9px;color:var(--tm);margin-top:2px;text-transform:uppercase}
+.rcard-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+/* FILTER SHEET */
+.sheet-ov{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:200;display:none;align-items:flex-end;backdrop-filter:blur(6px)}
+.sheet-ov.open{display:flex}
+.sheet{background:var(--g9);border:1px solid var(--b);border-radius:20px 20px 0 0;width:100%;max-height:86vh;overflow-y:auto;padding:0 0 max(20px,env(safe-area-inset-bottom))}
+.sh-handle{width:34px;height:3px;background:var(--bb);border-radius:2px;margin:12px auto 4px}
+.sh-hdr{padding:13px 18px;border-bottom:1px solid var(--b);display:flex;justify-content:space-between;align-items:center}
+.sh-title{font-size:16px;font-weight:700;color:var(--white)}
+.sh-close{width:27px;height:27px;background:var(--g8);border:1px solid var(--b);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--tm);cursor:pointer}
+.sh-body{padding:18px}
+.fsec{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--tm);margin-bottom:9px}
+.fchips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+.fchip{padding:7px 13px;border:1px solid var(--b);border-radius:100px;font-size:12px;font-weight:500;color:var(--tm);cursor:pointer;transition:all .15s;background:var(--g8)}
+.fchip.sel{background:rgba(14,165,233,.12);border-color:rgba(14,165,233,.4);color:var(--brand)}
+.togrow{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--b)}
+.togrow:last-child{border-bottom:none}
+.togrow-label{font-size:14px;color:var(--td)}
+.tog{width:42px;height:24px;background:var(--g7);border-radius:12px;position:relative;cursor:pointer;transition:background .2s;border:1px solid var(--b)}
+.tog.on{background:var(--brand);border-color:var(--brand)}
+.tog::after{content:'';position:absolute;width:17px;height:17px;background:var(--white);border-radius:50%;top:3px;left:3px;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.tog.on::after{transform:translateX(17px)}
+.sh-footer{padding:14px 18px;border-top:1px solid var(--b);display:grid;grid-template-columns:1fr 2fr;gap:9px;background:var(--g9)}
+.btn-reset{background:var(--g8);color:var(--td);border:1px solid var(--b);border-radius:var(--r);padding:12px;font-size:13px;font-weight:600;cursor:pointer}
+.btn-apply{background:var(--brand);color:var(--black);border-radius:var(--r);padding:12px;font-size:13px;font-weight:700;border:none;cursor:pointer}
+
+/* DETAIL PAGE */
+.detail-cover{height:230px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.dc-emoji{font-size:90px;opacity:.15}
+.dc-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 20%,rgba(0,0,0,.9))}
+.dc-content{position:absolute;bottom:0;left:0;right:0;padding:18px 16px}
+.dc-name{font-size:21px;font-weight:800;color:var(--white);letter-spacing:-1px;margin-bottom:3px}
+.dc-sub{font-size:12px;color:rgba(255,255,255,.55);display:flex;gap:10px}
+.detail-actions{position:sticky;top:60px;z-index:40;background:rgba(0,0,0,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--b);padding:11px 14px;display:grid;grid-template-columns:1fr 1fr auto;gap:8px}
+.detail-actions .btn-book-dark,.detail-actions .btn-wa{border-radius:10px;padding:11px}
+.qs-row{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--b)}
+.qs{padding:13px 6px;text-align:center;border-right:1px solid var(--b)}
+.qs:last-child{border-right:none}
+.qs-val{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.5px}
+.qs-label{font-size:9px;color:var(--tm);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+.dtab-scroll{display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--b);background:var(--black);padding:0 14px}
+.dtab-scroll::-webkit-scrollbar{display:none}
+.dtab{padding:13px 14px;font-size:13px;font-weight:500;color:var(--tm);white-space:nowrap;border-bottom:2px solid transparent;cursor:pointer;transition:all .15s}
+.dtab.active{color:#38bdf8;border-bottom-color:var(--brand)}
+.dt-content{padding:14px;background:var(--black)}
+.info-block{background:var(--g9);border:1px solid var(--b);border-radius:var(--rl);padding:16px;margin-bottom:11px}
+.info-block-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:12px;display:flex;align-items:center;gap:5px}
+.sr-row{margin-bottom:11px}
+.sr-top{display:flex;justify-content:space-between;margin-bottom:5px}
+.sr-label{font-size:12px;color:var(--td)}
+.sr-val{font-size:12px;font-weight:700;color:#34d399}
+.sr-val.orange{color:#fbbf24}
+.sr-track{height:6px;background:var(--g7);border-radius:3px;overflow:hidden}
+.sr-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--green),#34d399)}
+.sr-fill-o{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.doc-card{display:flex;gap:12px;background:var(--g9);border:1px solid var(--b);border-radius:var(--rl);padding:15px;margin-bottom:10px;cursor:pointer;transition:all .15s}
+.doc-card:active{background:var(--g8);border-color:var(--bb)}
+.doc-photo{width:54px;height:54px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:var(--black)}
+.doc-info{flex:1;min-width:0}
+.doc-name{font-size:14px;font-weight:700;color:var(--white);margin-bottom:2px}
+.doc-spec{font-size:11px;color:#38bdf8;font-weight:500;margin-bottom:6px}
+.doc-quals{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:7px}
+.qual{padding:2px 6px;background:rgba(255,255,255,.05);border:1px solid var(--b);border-radius:5px;font-size:9px;color:var(--tm)}
+.doc-stats{display:flex;gap:12px}
+.ds-val{font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:800;color:var(--white)}
+.ds-val.g{color:#34d399}
+.ds-label{font-size:9px;color:var(--tm);text-transform:uppercase;letter-spacing:.03em}
+.doc-btn{background:var(--g7);color:var(--text);border:1px solid var(--bb);border-radius:9px;padding:8px 12px;font-size:12px;font-weight:600;align-self:center;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
+.doc-btn:active{background:var(--white);color:var(--black)}
+.rev-card{background:var(--g9);border:1px solid var(--b);border-radius:var(--rl);padding:15px;margin-bottom:10px;position:relative;overflow:hidden}
+.rev-card::before{content:'"';position:absolute;top:-6px;right:12px;font-size:60px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:rgba(14,165,233,.07);line-height:1}
+.rev-hdr{display:flex;gap:9px;margin-bottom:9px;align-items:flex-start}
+.rev-av{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:var(--black);flex-shrink:0}
+.rev-name{font-size:13px;font-weight:700;color:var(--white);margin-bottom:1px}
+.rev-meta{font-size:10px;color:var(--tm)}
+.rev-title{font-size:13px;font-weight:700;color:var(--white);margin-bottom:6px}
+.rev-text{font-size:13px;color:var(--td);line-height:1.65;margin-bottom:10px}
+.rev-footer{display:flex;justify-content:space-between;align-items:center}
+.rev-type{font-size:10px;color:var(--tm)}
+.helpful{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tm);background:var(--g8);border:1px solid var(--b);border-radius:7px;padding:4px 9px;cursor:pointer}
+
+/* BOOK PAGE */
+.book-hdr{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-bottom:1px solid var(--b);background:var(--black)}
+.back-btn{font-size:13px;font-weight:600;color:var(--tm);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px}
+.bk-step-bar{display:flex;padding:14px 16px;border-bottom:1px solid var(--b);background:var(--black)}
+.bks{flex:1;text-align:center;position:relative}
+.bks::after{content:'';position:absolute;top:12px;left:50%;right:-50%;height:1px;background:var(--b);z-index:0}
+.bks:last-child::after{display:none}
+.bks-dot{width:25px;height:25px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;position:relative;z-index:1}
+.bks-done{background:var(--green);color:var(--black)}
+.bks-active{background:var(--brand);color:var(--black);box-shadow:0 0 10px rgba(14,165,233,.4)}
+.bks-wait{background:var(--g7);color:var(--tm);border:1px solid var(--b)}
+.bks-label{font-size:9px;color:var(--tm);margin-top:3px;text-transform:uppercase;letter-spacing:.03em}
+.bk-hosp{display:flex;gap:11px;align-items:center;padding:13px 14px;border-bottom:1px solid var(--b);background:var(--g9)}
+.bk-logo{width:42px;height:42px;border-radius:11px;background:var(--g7);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.bk-name{font-size:14px;font-weight:700;color:var(--white)}
+.bk-city{font-size:11px;color:var(--tm)}
+.bk-body{padding:16px}
+.time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:6px}
+.tslot{padding:9px 5px;border:1px solid var(--b);border-radius:9px;text-align:center;font-size:12px;font-weight:600;color:var(--tm);cursor:pointer;transition:all .15s;background:var(--g7)}
+.tslot.active{border-color:var(--brand);background:rgba(14,165,233,.12);color:var(--brand);box-shadow:0 0 8px rgba(14,165,233,.15)}
+.tslot.taken{opacity:.28;cursor:not-allowed}
+.pay-box{background:rgba(255,255,255,.03);border:1px solid var(--b);border-radius:var(--r);padding:14px;margin-top:14px}
+.pay-row{display:flex;justify-content:space-between;font-size:13px;color:var(--td);padding:4px 0}
+.pay-total{border-top:1px solid var(--b);margin-top:6px;padding-top:9px;font-weight:700;font-size:14px;color:var(--white)}
+.bk-footer{padding:14px 16px;border-top:1px solid var(--b);background:var(--black)}
+.btn-pay{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:var(--white);color:var(--black);padding:14px;border-radius:var(--r);font-size:15px;font-weight:700;transition:all .2s;border:none}
+.btn-pay:active{transform:scale(.98);background:var(--off-white)}
+.secure-note{text-align:center;font-size:10px;color:var(--tm);margin-top:7px}
+
+/* AUTH */
+.auth-card{background:var(--g9);border:1px solid var(--b);border-radius:var(--rxl);overflow:hidden;margin:0 16px}
+.auth-top{padding:26px 22px;background:linear-gradient(135deg,rgba(14,165,233,.07),transparent);border-bottom:1px solid var(--b);text-align:center}
+.auth-logo-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:14px}
+.auth-title{font-size:22px;font-weight:800;color:var(--white);letter-spacing:-1px;margin-bottom:4px}
+.auth-sub{font-size:13px;color:var(--td)}
+.role-pick{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:18px 22px;border-bottom:1px solid var(--b)}
+.rpick{padding:13px 7px;border:1px solid var(--b);border-radius:var(--r);text-align:center;cursor:pointer;transition:all .15s;background:var(--g8)}
+.rpick.active{border-color:rgba(14,165,233,.5);background:rgba(14,165,233,.08)}
+.rpick-icon{font-size:23px;margin-bottom:4px}
+.rpick-label{font-size:11px;font-weight:600;color:var(--tm)}
+.rpick.active .rpick-label{color:var(--brand)}
+.auth-form{padding:22px}
+.phone-row{display:flex;gap:7px}
+.phone-code{padding:12px 11px;background:var(--g7);border:1px solid var(--b);border-radius:var(--r);font-size:14px;color:var(--tm);white-space:nowrap;flex-shrink:0}
+.check-row{display:flex;align-items:flex-start;gap:9px;margin-bottom:18px}
+.check-box{width:19px;height:19px;border:1px solid var(--brand);border-radius:5px;background:rgba(14,165,233,.15);display:flex;align-items:center;justify-content:center;color:var(--brand);font-size:11px;flex-shrink:0;margin-top:1px}
+.check-label{font-size:12px;color:var(--td);line-height:1.5}
+.check-label a{color:var(--brand)}
+.or-div{text-align:center;color:var(--tm);font-size:11px;position:relative;margin:16px 0}
+.or-div::before,.or-div::after{content:'';position:absolute;top:50%;width:calc(50% - 18px);height:1px;background:var(--b)}
+.or-div::before{left:0}.or-div::after{right:0}
+.social-btns{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px}
+.social-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px;border:1px solid var(--b);border-radius:var(--r);font-size:13px;font-weight:500;color:var(--td);background:var(--g8);cursor:pointer;transition:all .15s}
+.social-btn:active{background:var(--g7);border-color:var(--bb)}
+.auth-footer-txt{text-align:center;font-size:13px;color:var(--tm);margin-top:12px}
+.auth-footer-txt a{color:var(--brand);font-weight:600}
+
+/* DASHBOARD */
+.dash-greet{padding:22px 16px 0}
+.dash-title{font-size:21px;font-weight:800;color:var(--white);letter-spacing:-1px;margin-bottom:2px}
+.dash-sub{font-size:12px;color:var(--tm)}
+.dash-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin:18px 0;border:1px solid var(--b);border-radius:var(--rl);overflow:hidden;background:var(--b)}
+.dsbox{background:var(--g9);padding:16px 13px}
+.dsb-icon{font-size:18px;margin-bottom:7px}
+.dsb-val{font-family:'Bricolage Grotesque',sans-serif;font-size:24px;font-weight:800;color:var(--white);letter-spacing:-1px}
+.dsb-label{font-size:10px;color:var(--tm);margin-top:2px;text-transform:uppercase;letter-spacing:.04em}
+.dsb-change{font-size:10px;font-weight:600;margin-top:3px}
+.dsb-up{color:#34d399}.dsb-dn{color:var(--rose)}
+.dash-widget{background:var(--g9);border:1px solid var(--b);border-radius:var(--rl);padding:16px 14px;margin-bottom:11px}
+.dw-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}
+.dw-title{font-size:14px;font-weight:700;color:var(--white)}
+.dw-link{font-size:11px;font-weight:600;color:var(--brand)}
+.appt-item{display:flex;gap:11px;align-items:center;padding:10px 0;border-bottom:1px solid var(--b)}
+.appt-item:last-child{border-bottom:none}
+.appt-av{width:36px;height:36px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:var(--black)}
+.appt-name{font-size:13px;font-weight:700;color:var(--white);margin-bottom:2px}
+.appt-detail{font-size:11px;color:var(--tm)}
+.appt-status{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.s-conf{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.2)}
+.s-pend{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.s-done{background:rgba(255,255,255,.05);color:var(--tm);border:1px solid var(--b)}
+.notif-item{display:flex;gap:9px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--b)}
+.notif-item:last-child{border-bottom:none}
+.ndot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.nd-b{background:var(--brand)}.nd-g{background:var(--green)}.nd-r{background:var(--rose)}
+.notif-text{font-size:12px;color:var(--td);line-height:1.5;flex:1}
+.notif-time{font-size:10px;color:var(--tm);margin-top:2px}
+
+/* COMPARE */
+.cmp-wrap{overflow-x:auto;scrollbar-width:none;margin:18px -16px 0;padding:0 16px}
+.cmp-wrap::-webkit-scrollbar{display:none}
+.cmp-table{min-width:500px;border-radius:var(--rl);overflow:hidden;border:1px solid var(--b)}
+.cmp-hrow{display:grid;grid-template-columns:100px 1fr 1fr 1fr;background:var(--g9);border-bottom:1px solid var(--b)}
+.cmp-h{padding:14px 8px;text-align:center;border-left:1px solid var(--b)}
+.cmp-h:first-child{border-left:none;background:var(--g8)}
+.cmp-hlogo{width:34px;height:34px;border-radius:9px;margin:0 auto 5px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.cmp-hname{font-size:11px;font-weight:700;color:var(--white)}
+.cmp-hcity{font-size:9px;color:var(--tm);margin-top:1px}
+.cmp-best{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.2);border-radius:5px;padding:2px 6px;font-size:9px;font-weight:700;display:inline-block;margin-top:4px}
+.cmp-row{display:grid;grid-template-columns:100px 1fr 1fr 1fr;border-bottom:1px solid var(--b)}
+.cmp-row:last-child{border-bottom:none}
+.cmp-label{padding:11px 8px;font-size:11px;font-weight:600;color:var(--tm);background:var(--g9)}
+.cmp-val{padding:11px 6px;text-align:center;font-size:12px;color:var(--td);border-left:1px solid var(--b);background:var(--g8)}
+.cmp-val.best{color:#34d399;font-weight:700}
+.cmp-val.bb{color:#38bdf8;font-weight:700}
+.cmp-chk{color:#34d399;font-size:14px}
+.cmp-x{color:var(--b);font-size:14px}
+
+/* PRICING */
+.pcard{background:var(--g8);border:1px solid var(--b);border-radius:var(--rxl);padding:22px;margin-bottom:11px;position:relative;overflow:hidden}
+.pcard.popular{border-color:rgba(14,165,233,.4);background:linear-gradient(135deg,rgba(14,165,233,.06),var(--g8) 60%)}
+.pcard.popular::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--brand),transparent)}
+.pop-badge{display:inline-block;background:var(--brand);color:var(--black);border-radius:6px;padding:3px 11px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+.pcard-tier{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tm);margin-bottom:5px}
+.pcard-price{font-family:'Bricolage Grotesque',sans-serif;font-size:36px;font-weight:800;color:var(--white);letter-spacing:-2px}
+.pcard-price sup{font-size:16px;vertical-align:top;margin-top:9px;letter-spacing:0}
+.pcard-period{font-size:11px;color:var(--tm);margin-bottom:19px}
+.pcard-features{list-style:none;margin-bottom:20px;display:flex;flex-direction:column;gap:9px}
+.pf{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--td)}
+.pf-chk{color:var(--green);font-size:13px;flex-shrink:0;margin-top:1px}
+.pf-x{color:var(--b);font-size:13px;flex-shrink:0}
+.btn-plan{width:100%;padding:12px;border-radius:var(--r);font-size:13px;font-weight:700;border:none;cursor:pointer;transition:all .2s}
+.btn-plan:active{transform:scale(.98)}
+.bpw{background:var(--white);color:var(--black)}
+.bpo{background:transparent;color:var(--text);border:1px solid var(--bb)}
+.bpd{background:rgba(255,255,255,.07);color:var(--td);border:1px solid var(--b)}
+.pricing-toggle{display:flex;background:var(--g8);border:1px solid var(--b);border-radius:11px;padding:3px;width:fit-content;margin:16px 0 22px}
+.pt{padding:7px 18px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--tm)}
+.pt.active{background:var(--white);color:var(--black)}
+
+@keyframes floatBaby{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes spinRing{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes orbitDots{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes sparkle1{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1.5)}}
+@keyframes sparkle2{0%,100%{opacity:0;transform:scale(0)}40%{opacity:1;transform:scale(1.8)}}
+@keyframes fadeQuote{from{opacity:0}to{opacity:1}}
+@keyframes slideWord{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes expandLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* Light mode overrides */
+html[data-theme="light"] .hero-orb1{background:radial-gradient(circle,rgba(14,165,233,.12) 0%,transparent 70%)}
+html[data-theme="light"] .hero-orb2{background:radial-gradient(circle,rgba(244,63,94,.08) 0%,transparent 70%)}
+html[data-theme="light"] .hcard{background:var(--g8);border-left:3px solid transparent}
+html[data-theme="light"] .hcard+.hcard{border-top:1px solid var(--b)}
+html[data-theme="light"] .nums-grid .nc{background:var(--g8)}
+html[data-theme="light"] .nums{background:linear-gradient(180deg,rgba(14,165,233,.04),transparent)}
+html[data-theme="light"] .tcard{background:var(--g8);border-color:var(--b)}
+html[data-theme="light"] .city-chip{background:var(--g8);border-color:var(--b)}
+html[data-theme="light"] .tag-b{background:rgba(14,165,233,.08);color:#0369a1}
+html[data-theme="light"] .tag-g{background:rgba(16,185,129,.08);color:#047857}
+html[data-theme="light"] .tag-o{background:rgba(245,158,11,.08);color:#92400e}
+html[data-theme="light"] .hm{background:rgba(0,0,0,.04);border-color:var(--b)}
+html[data-theme="light"] .hm-val{color:var(--text)}
+html[data-theme="light"] .hm-val.g{color:#047857}
+html[data-theme="light"] .hm-val.b{color:#0369a1}
+html[data-theme="light"] .hs{background:rgba(0,0,0,.03)}
+html[data-theme="light"] .hs-val{color:var(--text)}
+html[data-theme="light"] .hero-stats{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.08)}
+html[data-theme="light"] .rcard-sr{color:#047857}
+html[data-theme="light"] .srbar-fill{background:linear-gradient(90deg,#10b981,#059669)}
+html[data-theme="light"] .btn-book-dark{background:var(--text);color:var(--black)}
+html[data-theme="light"] .btn-white{background:var(--text);color:var(--black)}
+html[data-theme="light"] .btn-outline{border-color:rgba(0,0,0,.2);color:var(--text)}
+html[data-theme="light"] .doc-card{background:var(--g8);border-color:var(--b)}
+html[data-theme="light"] .rev-card{background:var(--g8)}
+html[data-theme="light"] .info-block{background:var(--g8);border-color:var(--b)}
+html[data-theme="light"] .dash-widget{background:var(--g8)}
+html[data-theme="light"] .dsbox{background:var(--g8)}
+html[data-theme="light"] .pcard{background:var(--g8);border-color:var(--b)}
+html[data-theme="light"] .pcard.popular{border-color:rgba(14,165,233,.5)}
+html[data-theme="light"] .auth-card{background:var(--g8)}
+html[data-theme="light"] .auth-top{background:linear-gradient(135deg,rgba(14,165,233,.05),transparent)}
+html[data-theme="light"] .rpick{background:var(--g7)}
+html[data-theme="light"] .sc-text{color:rgba(0,0,0,.3)}
+html[data-theme="light"] .footer{background:var(--g9);border-top-color:var(--b)}
+html[data-theme="light"] .eyebrow{background:rgba(14,165,233,.08);border-color:rgba(14,165,233,.2)}
+html[data-theme="light"] .bks-wait{background:var(--g7);border-color:var(--b)}
+html[data-theme="light"] .trt{background:var(--g8)}
+html[data-theme="light"] .trt-grid{background:var(--b)}
+html[data-theme="light"] .step{border-bottom-color:var(--b)}
+html[data-theme="light"] .step-n{background:var(--g7);border-color:var(--b)}
+html[data-theme="light"] .rm{background:var(--g7);border-color:var(--b)}
+html[data-theme="light"] .rm-val{color:var(--text)}
+html[data-theme="light"] .cmp-table{border-color:var(--b)}
+html[data-theme="light"] .cmp-hrow{background:var(--g9)}
+html[data-theme="light"] .cmp-h{background:var(--g9)}
+html[data-theme="light"] .cmp-label{background:var(--g9)}
+html[data-theme="light"] .cmp-val{background:var(--g8)}
+html[data-theme="light"] .cmp-x{color:rgba(0,0,0,.2)}
+html[data-theme="light"] .sh-footer,.sheet-ov .sh-footer{background:var(--g8)}
+html[data-theme="light"] .toast{background:var(--g8);border-color:var(--b);color:var(--text)}
+html[data-theme="light"] .qs-row{background:var(--g8)}
+html[data-theme="light"] .dtab-scroll{background:var(--g8)}
+html[data-theme="light"] .detail-actions{background:rgba(255,255,255,.92)}
+html[data-theme="light"] .sh-hdr{border-bottom-color:var(--b)}
+html[data-theme="light"] .fchip{background:var(--g7);border-color:var(--b);color:var(--td)}
+html[data-theme="light"] .fchip.sel{background:rgba(14,165,233,.1);border-color:rgba(14,165,233,.3);color:var(--brand)}
+html[data-theme="light"] .tog{background:var(--g6);border-color:var(--b)}
+html[data-theme="light"] .pay-box{background:rgba(0,0,0,.03);border-color:var(--b)}
+html[data-theme="light"] .appt-status.s-done{background:rgba(0,0,0,.04)}
+html[data-theme="light"] .bi-label{color:rgba(0,0,0,.4)}
+html[data-theme="light"] .bi.active .bi-label{color:var(--brand)}
+html[data-theme="light"] .waf{box-shadow:0 4px 18px rgba(37,211,102,.35)}
+html[data-theme="light"] #page-home{background:var(--g9)}
+html[data-theme="light"] #page-search,html[data-theme="light"] #page-dashboard,html[data-theme="light"] #page-saved,html[data-theme="light"] #page-compare,html[data-theme="light"] #page-auth,html[data-theme="light"] #page-book{background:var(--g9)}
+html[data-theme="light"] .sp-hdr,.res-bar{background:var(--g8);border-color:var(--b)}
+html[data-theme="light"] .rcard{background:var(--g8);border-color:var(--b)}
+html[data-theme="light"] .hdivider{background:linear-gradient(90deg,transparent,rgba(0,0,0,.1),transparent)}
+html[data-theme="light"] .nums-grid{background:var(--b)}
+html[data-theme="light"] .nc{background:var(--g9)}
+html[data-theme="light"] .nc-val{color:var(--text)}
+html[data-theme="light"] .hcards-list{border-color:var(--b)}
+html[data-theme="light"] .logo-box{background:var(--text);color:var(--black)}
+html[data-theme="light"] .logo-icon{background:var(--text)}
+html[data-theme="light"] .logo-icon svg path{fill:var(--black)}
+html[data-theme="light"] .btn-ho{color:var(--text);border-color:rgba(0,0,0,.2)}
+html[data-theme="light"] .btn-hs{color:rgba(0,0,0,.5)}
+html[data-theme="light"] .dc-content .dc-name{color:#fff}
+html[data-theme="light"] .bk-hosp{background:var(--g8)}
+html[data-theme="light"] .book-hdr,.bk-step-bar,.bk-footer{background:var(--g8);border-color:var(--b)}
+html[data-theme="light"] .bk-logo{background:var(--g6)}
+html[data-theme="light"] .sp-bar{background:var(--g7);border-color:var(--b)}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr" id="hdr">
+  <div class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24" fill="black"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+    </div>
+    <div class="logo-name">FERTY<span class="logo-box">9</span></div>
+  </div>
+  <div class="hdr-btns" style="display:flex;align-items:center;gap:6px">
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" style="width:36px;height:36px;border-radius:10px;background:transparent;border:1px solid var(--b);display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;transition:all .2s;color:var(--text);flex-shrink:0" title="Switch to Light Mode">🌙</button>
+    <button class="btn-hs" onclick="showPage('auth')">Sign In</button>
+    <button class="btn-ho" onclick="showPage('book')">Book</button>
+  </div>
+</header>
+
+<!-- ═══ HOME PAGE ═══ -->
+<div id="page-home" class="page active" style="padding-top:0;padding-bottom:0">
+
+  <!-- HERO -->
+  <div style="min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:88px 20px 80px">
+    <div class="hero-orb1"></div>
+    <div class="hero-orb2"></div>
+    <div class="hero-inner">
+
+      <!-- CINEMATIC MOTHER + BABY ILLUSTRATION -->
+      <div style="position:relative;width:220px;height:220px;margin:0 auto 32px;animation:floatBaby 4s ease-in-out infinite">
+
+        <!-- Outer glow ring -->
+        <div style="position:absolute;inset:-12px;border-radius:50%;background:conic-gradient(from 0deg,rgba(14,165,233,.4),rgba(244,63,94,.3),rgba(14,165,233,.4));animation:spinRing 8s linear infinite;filter:blur(2px)"></div>
+
+        <!-- Middle ring -->
+        <div style="position:absolute;inset:-4px;border-radius:50%;background:rgba(0,0,0,1)"></div>
+
+        <!-- Main circle -->
+        <div style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 40% 35%,#1a1a2e,#0d0d1a);overflow:hidden;border:1px solid rgba(14,165,233,.2)">
+
+          <!-- Warm ambient light -->
+          <div style="position:absolute;top:-20px;left:-20px;width:120px;height:120px;background:radial-gradient(circle,rgba(251,191,101,.12),transparent 70%);border-radius:50%"></div>
+
+          <!-- MOTHER SVG -->
+          <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
+            <!-- Mother body / torso -->
+            <ellipse cx="110" cy="165" rx="52" ry="38" fill="#1a1520" opacity="0.9"/>
+            <!-- Mother arms curved holding baby -->
+            <path d="M65 145 Q55 130 62 115 Q68 105 78 118 Q88 132 95 140" stroke="#c8a882" stroke-width="14" stroke-linecap="round" fill="none"/>
+            <path d="M155 145 Q165 130 158 115 Q152 105 142 118 Q132 132 125 140" stroke="#c8a882" stroke-width="14" stroke-linecap="round" fill="none"/>
+            <!-- Mother neck -->
+            <rect x="104" y="88" width="12" height="20" rx="6" fill="#c8a882"/>
+            <!-- Mother head -->
+            <ellipse cx="110" cy="78" rx="22" ry="24" fill="#c8a882"/>
+            <!-- Mother hair flowing -->
+            <path d="M88 68 Q82 45 90 30 Q100 15 110 20 Q125 14 132 28 Q140 45 134 68" fill="#2d1810" stroke="#1a0e08" stroke-width="1"/>
+            <path d="M88 68 Q80 80 83 95 Q78 105 72 112" stroke="#2d1810" stroke-width="8" stroke-linecap="round" fill="none"/>
+            <path d="M134 68 Q140 82 136 96 Q140 108 144 116" stroke="#2d1810" stroke-width="7" stroke-linecap="round" fill="none"/>
+            <!-- Mother eyes closed / peaceful -->
+            <ellipse cx="103" cy="76" rx="5" ry="2" fill="#8b6347"/>
+            <ellipse cx="117" cy="76" rx="5" ry="2" fill="#8b6347"/>
+            <!-- Closed eye lashes -->
+            <path d="M99 74 Q101 72 103 74 Q105 72 107 74" stroke="#5c3d20" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M113 74 Q115 72 117 74 Q119 72 121 74" stroke="#5c3d20" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Smile -->
+            <path d="M105 85 Q110 89 115 85" stroke="#8b6347" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+            <!-- BABY nestled in arms -->
+            <!-- Baby body wrapped in blanket -->
+            <ellipse cx="110" cy="142" rx="24" ry="18" fill="#e8f4f8" opacity="0.95"/>
+            <ellipse cx="110" cy="142" rx="22" ry="16" fill="#d4eef7"/>
+            <!-- Baby blanket folds -->
+            <path d="M88 140 Q95 132 110 130 Q125 132 132 140" stroke="#b8dff0" stroke-width="2" fill="none"/>
+            <!-- Baby tiny head peeking -->
+            <ellipse cx="110" cy="126" rx="13" ry="12" fill="#f5d5b5"/>
+            <!-- Baby hair wisps -->
+            <path d="M100 118 Q105 112 110 115 Q115 112 120 118" stroke="#8b6040" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <!-- Baby closed eyes sleeping -->
+            <path d="M105 125 Q107 123 109 125" stroke="#c4875a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M111 125 Q113 123 115 125" stroke="#c4875a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Baby tiny nose -->
+            <circle cx="110" cy="128" r="1.5" fill="rgba(196,135,90,.5)"/>
+            <!-- Baby little fist peeking from blanket -->
+            <circle cx="92" cy="148" r="7" fill="#f5d5b5"/>
+            <path d="M87 145 Q90 142 93 145" stroke="#e0b896" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+            <!-- Soft heart sparkles -->
+            <text x="148" y="108" font-size="9" fill="rgba(244,63,94,.6)" style="animation:twinkle 2s infinite">♥</text>
+            <text x="58" y="112" font-size="7" fill="rgba(244,63,94,.4)">♥</text>
+            <text x="155" y="135" font-size="5" fill="rgba(14,165,233,.5)">✦</text>
+            <text x="52" y="140" font-size="6" fill="rgba(14,165,233,.4)">✦</text>
+
+            <!-- Warm light halo above -->
+            <ellipse cx="110" cy="60" rx="30" ry="8" fill="rgba(251,191,101,.06)"/>
+          </svg>
+
+          <!-- Sparkle particles -->
+          <div style="position:absolute;top:18px;right:28px;width:3px;height:3px;background:#fbbf60;border-radius:50%;animation:sparkle1 2.5s ease-in-out infinite"></div>
+          <div style="position:absolute;top:32px;left:24px;width:2px;height:2px;background:#38bdf8;border-radius:50%;animation:sparkle2 3s ease-in-out infinite 0.5s"></div>
+          <div style="position:absolute;bottom:30px;right:22px;width:2px;height:2px;background:#f472b6;border-radius:50%;animation:sparkle1 2s ease-in-out infinite 1s"></div>
+        </div>
+
+        <!-- Floating dots orbit -->
+        <div style="position:absolute;inset:-20px;border-radius:50%;animation:orbitDots 6s linear infinite">
+          <div style="position:absolute;top:0;left:50%;width:5px;height:5px;background:rgba(14,165,233,.7);border-radius:50%;transform:translateX(-50%);filter:blur(0.5px)"></div>
+        </div>
+        <div style="position:absolute;inset:-20px;border-radius:50%;animation:orbitDots 6s linear infinite reverse 3s">
+          <div style="position:absolute;bottom:0;left:50%;width:4px;height:4px;background:rgba(244,63,94,.6);border-radius:50%;transform:translateX(-50%)"></div>
+        </div>
+      </div>
+
+      <!-- CINEMATIC QUOTE -->
+      <div style="position:relative;margin-bottom:28px;padding:0 8px">
+
+        <!-- Big decorative quote mark -->
+        <div style="font-family:'Bricolage Grotesque',Georgia,serif;font-size:100px;font-weight:800;line-height:0.6;color:transparent;-webkit-text-stroke:1px rgba(14,165,233,.2);text-align:left;margin-bottom:8px;padding-left:4px;user-select:none;animation:fadeQuote 1.5s ease-out">&ldquo;</div>
+
+        <!-- Line 1: thin italic -->
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(15px,4.2vw,20px);font-weight:300;font-style:italic;color:rgba(240,237,232,.55);letter-spacing:.02em;margin-bottom:6px;animation:slideWord 0.8s ease-out 0.2s both">
+          She held him close —
+        </div>
+
+        <!-- Line 2: BOLD gradient — the power line -->
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(28px,8.5vw,52px);font-weight:800;letter-spacing:-2.5px;line-height:1;margin-bottom:6px;background:linear-gradient(135deg,#fff 0%,#e0f2fe 40%,#38bdf8 70%,#f472b6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:slideWord 0.8s ease-out 0.4s both">
+          and the whole world
+        </div>
+
+        <!-- Line 3: thin italic again -->
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(15px,4.2vw,20px);font-weight:300;font-style:italic;color:rgba(240,237,232,.55);letter-spacing:.02em;margin-bottom:12px;animation:slideWord 0.8s ease-out 0.6s both">
+          finally made sense.
+        </div>
+
+        <!-- Closing quote right aligned -->
+        <div style="font-family:'Bricolage Grotesque',Georgia,serif;font-size:100px;font-weight:800;line-height:0.6;color:transparent;-webkit-text-stroke:1px rgba(244,63,94,.18);text-align:right;padding-right:4px;user-select:none">&rdquo;</div>
+
+        <!-- Thin accent line -->
+        <div style="width:48px;height:1.5px;background:linear-gradient(90deg,rgba(14,165,233,.8),rgba(244,63,94,.6));border-radius:1px;margin:14px auto 0;animation:expandLine 1s ease-out 0.8s both;transform-origin:center"></div>
+      </div>
+
+      <!-- Sub text -->
+      <p style="font-size:14px;color:rgba(240,237,232,.4);line-height:1.7;margin-bottom:30px;letter-spacing:.01em;font-style:italic;animation:slideWord 0.8s ease-out 1s both">
+        That moment is waiting for you.<br>
+        We help you find the right hospital to get there.
+      </p>
+
+      <div class="hero-btns" style="animation:slideWord 0.8s ease-out 1.2s both">
+        <button class="btn-white" onclick="showPage('search')">Find Your Hospital →</button>
+        <button class="btn-outline" onclick="showPage('compare')">⚖️ Compare Hospitals</button>
+      </div>
+      <div class="hero-stats" style="animation:slideWord 0.8s ease-out 1.4s both">
+        <div class="hs"><div class="hs-val">500<span style="color:var(--brand)">+</span></div><div class="hs-label">Hospitals</div></div>
+        <div class="hs"><div class="hs-val">72<span style="color:var(--brand)">%</span></div><div class="hs-label">Avg Success</div></div>
+        <div class="hs"><div class="hs-val">50K<span style="color:var(--brand)">+</span></div><div class="hs-label">Helped</div></div>
+      </div>
+    </div>
+    <div class="scroll-cue"><div class="sc-text">Scroll</div><div class="sc-line"></div></div>
+  </div>
+
+  <div class="hdivider"></div>
+
+  <!-- NUMBERS -->
+  <div class="nums"><div class="nums-grid">
+    <div class="nc"><div class="nc-val">500<span>+</span></div><div class="nc-label">Verified Hospitals</div></div>
+    <div class="nc"><div class="nc-val">72<span>%</span></div><div class="nc-label">Avg IVF Success</div></div>
+    <div class="nc"><div class="nc-val">50K<span>+</span></div><div class="nc-label">Couples Helped</div></div>
+    <div class="nc"><div class="nc-val">25K<span>+</span></div><div class="nc-label">Verified Reviews</div></div>
+  </div></div>
+
+  <div class="hdivider"></div>
+
+  <!-- FEATURED HOSPITALS -->
+  <div style="background:var(--g9);padding:56px 0">
+    <div class="container">
+      <div class="sec-eyebrow">Top Rated</div>
+      <h2 class="sec-title">Featured Hospitals</h2>
+      <p class="sec-sub">Handpicked with verified success rates</p>
+      <div class="hcards-list">
+        <div class="hcard" onclick="showPage('detail')">
+          <div class="hcard-row">
+            <div class="hcard-num">01</div>
+            <div class="hcard-logo" style="background:linear-gradient(135deg,#0369a1,#0ea5e9)">🏥</div>
+            <div class="hcard-body">
+              <div class="hcard-name">Nova IVF Fertility</div>
+              <div class="hcard-city">📍 Andheri East, Mumbai</div>
+              <div class="hcard-tags"><span class="tag tag-b">✓ NABH</span><span class="tag tag-g">Verified</span><span class="tag tag-o">⭐ Featured</span></div>
+              <div class="hcard-metrics">
+                <div class="hm"><div class="hm-val g">72.5%</div><div class="hm-label">Success</div></div>
+                <div class="hm"><div class="hm-val b">12.5K</div><div class="hm-label">Cycles</div></div>
+                <div class="hm"><div class="hm-val">₹1.2L</div><div class="hm-label">From</div></div>
+              </div>
+              <div class="hcard-actions">
+                <button class="btn-book-dark" onclick="event.stopPropagation();showPage('book')">📅 Book Appointment</button>
+                <button class="btn-wa-sm" onclick="event.stopPropagation();window.open('https://wa.me/918000000000?text=Hi%2C+I+found+Nova+IVF+on+FERTY9','_blank')">💬</button>
+                <button class="btn-fav" onclick="event.stopPropagation();toggleSave(this)">♡</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hcard" onclick="showPage('detail')">
+          <div class="hcard-row">
+            <div class="hcard-num">02</div>
+            <div class="hcard-logo" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">🌸</div>
+            <div class="hcard-body">
+              <div class="hcard-name">Cloudnine Fertility</div>
+              <div class="hcard-city">📍 Jayanagar, Bangalore</div>
+              <div class="hcard-tags"><span class="tag tag-b">✓ JCI</span><span class="tag tag-b">✓ NABH</span></div>
+              <div class="hcard-metrics">
+                <div class="hm"><div class="hm-val g">68.3%</div><div class="hm-label">Success</div></div>
+                <div class="hm"><div class="hm-val b">8.2K</div><div class="hm-label">Cycles</div></div>
+                <div class="hm"><div class="hm-val">₹1.4L</div><div class="hm-label">From</div></div>
+              </div>
+              <div class="hcard-actions">
+                <button class="btn-book-dark" onclick="event.stopPropagation();showPage('book')">📅 Book Appointment</button>
+                <button class="btn-wa-sm" onclick="event.stopPropagation()">💬</button>
+                <button class="btn-fav" onclick="event.stopPropagation();toggleSave(this)">♡</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hcard" onclick="showPage('detail')">
+          <div class="hcard-row">
+            <div class="hcard-num">03</div>
+            <div class="hcard-logo" style="background:linear-gradient(135deg,#e11d48,#fb7185)">💊</div>
+            <div class="hcard-body">
+              <div class="hcard-name">Oasis Fertility Centre</div>
+              <div class="hcard-city">📍 Banjara Hills, Hyderabad</div>
+              <div class="hcard-tags"><span class="tag tag-b">✓ NABH</span><span class="tag tag-g">✓ ISAR</span></div>
+              <div class="hcard-metrics">
+                <div class="hm"><div class="hm-val g">70.1%</div><div class="hm-label">Success</div></div>
+                <div class="hm"><div class="hm-val b">9.8K</div><div class="hm-label">Cycles</div></div>
+                <div class="hm"><div class="hm-val">₹1.1L</div><div class="hm-label">From</div></div>
+              </div>
+              <div class="hcard-actions">
+                <button class="btn-book-dark" onclick="event.stopPropagation();showPage('book')">📅 Book Appointment</button>
+                <button class="btn-wa-sm" onclick="event.stopPropagation()">💬</button>
+                <button class="btn-fav" style="color:#f43f5e" onclick="event.stopPropagation();toggleSave(this)">♥</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:18px"><button class="btn-outline" onclick="showPage('search')">View All 500+ Hospitals →</button></div>
+    </div>
+  </div>
+
+  <div class="hdivider"></div>
+
+  <!-- TREATMENTS -->
+  <div style="background:var(--black);padding:56px 0">
+    <div class="container">
+      <div class="sec-eyebrow">All Treatments</div>
+      <h2 class="sec-title">What We Cover</h2>
+      <div class="trt-grid">
+        <div class="trt" onclick="showPage('search')"><div class="trt-em">🧬</div><div class="trt-name">IVF</div><div class="trt-stat">Avg 72% success</div><span class="trt-arr">→</span></div>
+        <div class="trt" onclick="showPage('search')"><div class="trt-em">💉</div><div class="trt-name">IUI</div><div class="trt-stat">Avg 25% success</div><span class="trt-arr">→</span></div>
+        <div class="trt" onclick="showPage('search')"><div class="trt-em">🔬</div><div class="trt-name">ICSI</div><div class="trt-stat">Avg 70% success</div><span class="trt-arr">→</span></div>
+        <div class="trt" onclick="showPage('search')"><div class="trt-em">❄️</div><div class="trt-name">FET</div><div class="trt-stat">Avg 65% success</div><span class="trt-arr">→</span></div>
+        <div class="trt" onclick="showPage('search')"><div class="trt-em">🥚</div><div class="trt-name">Egg Donation</div><div class="trt-stat">Avg 75% success</div><span class="trt-arr">→</span></div>
+        <div class="trt" onclick="showPage('search')"><div class="trt-em">👩</div><div class="trt-name">Surrogacy</div><div class="trt-stat">Fully supported</div><span class="trt-arr">→</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hdivider"></div>
+
+  <!-- HOW IT WORKS -->
+  <div style="background:var(--g9);padding:56px 0">
+    <div class="container">
+      <div class="sec-eyebrow">Simple Process</div>
+      <h2 class="sec-title">3 Steps to Your Hospital</h2>
+      <div style="margin-top:24px">
+        <div class="step"><div class="step-n">1</div><div style="flex:1"><div class="step-title">Search & Filter</div><div class="step-desc">Filter by city, treatment, success rate & budget.</div></div><span class="step-icon">🔍</span></div>
+        <div class="step"><div class="step-n">2</div><div style="flex:1"><div class="step-title">Compare Side by Side</div><div class="step-desc">Up to 3 hospitals — success rates, pricing, doctors & reviews.</div></div><span class="step-icon">⚖️</span></div>
+        <div class="step"><div class="step-n">3</div><div style="flex:1"><div class="step-title">Book & Connect</div><div class="step-desc">Book online or WhatsApp instantly. Zero phone calls needed.</div></div><span class="step-icon">📅</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hdivider"></div>
+
+  <!-- TESTIMONIALS -->
+  <div style="background:var(--black);padding:56px 0">
+    <div class="container">
+      <div class="sec-eyebrow">Real Stories</div>
+      <h2 class="sec-title">Couples Who Made It</h2>
+      <div style="margin-top:24px">
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"After 3 failed cycles elsewhere, Dr. Pai's team identified what others missed. We're now proud parents of a healthy baby girl. FERTY9 helped us find them."</p><div class="tcard-author"><div class="tcard-av" style="background:#38bdf8">PS</div><div><div class="tcard-name">Priya Sharma</div><div class="tcard-meta">IVF · Nova IVF Fertility, Mumbai</div></div><div class="outcome">🎉 Success</div></div></div>
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"Complete transparency — no hidden charges. The comparison on FERTY9 helped us shortlist in one evening. Pregnant on first cycle!"</p><div class="tcard-author"><div class="tcard-av" style="background:#a78bfa">RK</div><div><div class="tcard-name">Rahul & Kavita M.</div><div class="tcard-meta">IVF · Cloudnine, Bangalore</div></div><div class="outcome">🎉 Success</div></div></div>
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"The verified success rate data on FERTY9 is what convinced us to choose Oasis. We trusted the data — and it paid off."</p><div class="tcard-author"><div class="tcard-av" style="background:#fb7185">AM</div><div><div class="tcard-name">Anita & Suresh M.</div><div class="tcard-meta">ICSI · Oasis Fertility, Hyderabad</div></div><div class="outcome">🎉 Success</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hdivider"></div>
+
+  <!-- CITIES -->
+  <div style="background:var(--g9);padding:56px 0">
+    <div class="container">
+      <div class="sec-eyebrow">Browse by City</div>
+      <h2 class="sec-title">15 Cities & Growing</h2>
+    </div>
+    <div class="city-scroll">
+      <div class="city-chip"><div class="city-em">🏙️</div><div class="city-name">Mumbai</div><div class="city-cnt">124</div></div>
+      <div class="city-chip"><div class="city-em">🏛️</div><div class="city-name">Delhi</div><div class="city-cnt">98</div></div>
+      <div class="city-chip"><div class="city-em">🌿</div><div class="city-name">Bangalore</div><div class="city-cnt">87</div></div>
+      <div class="city-chip"><div class="city-em">🌊</div><div class="city-name">Chennai</div><div class="city-cnt">65</div></div>
+      <div class="city-chip"><div class="city-em">💎</div><div class="city-name">Hyderabad</div><div class="city-cnt">76</div></div>
+      <div class="city-chip"><div class="city-em">🌸</div><div class="city-name">Pune</div><div class="city-cnt">52</div></div>
+      <div class="city-chip"><div class="city-em">🦁</div><div class="city-name">Ahmedabad</div><div class="city-cnt">44</div></div>
+      <div class="city-chip"><div class="city-em">🐟</div><div class="city-name">Kochi</div><div class="city-cnt">31</div></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="app-footer" style="display:block">
+    <div class="footer-logo">
+      <div class="logo-icon" style="width:26px;height:26px;border-radius:7px"><svg viewBox="0 0 24 24" fill="black" width="14" height="14"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+      <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:17px;color:var(--white);letter-spacing:-1px;display:flex;align-items:center">FERTY<span style="display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;background:var(--white);color:var(--black);border-radius:4px;font-size:10px;font-weight:900;margin-left:2px">9</span></span>
+    </div>
+    <p class="footer-desc">India's most trusted fertility hospital platform. Find, compare & book with full transparency.</p>
+    <div class="footer-contact"><span>📞 +91 80000 00000</span><span>✉️ hello@ferty9.in</span></div>
+    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#" onclick="showPage('pricing')">For Hospitals</a><a href="#">About</a></div>
+    <div class="footer-copy">© 2025 FERTY9. All rights reserved.</div>
+  </footer>
+</div>
+
+<!-- ═══ SEARCH PAGE ═══ -->
+<div id="page-search" class="page">
+  <button onclick="showPage('home')" style="display:flex;align-items:center;gap:5px;padding:11px 14px;font-size:12px;font-weight:600;color:var(--tm);background:var(--black);border:none;border-bottom:1px solid var(--b);width:100%;cursor:pointer">← Home</button>
+  <div class="sp-hdr">
+    <div class="sp-input"><span style="font-size:15px">🔍</span><input type="text" placeholder="Hospital or treatment…" value="IVF · Mumbai"></div>
+    <button class="filter-btn" onclick="openSheet()">⚙️ <span class="fcnt">3</span></button>
+  </div>
+  <div class="res-bar"><span>Showing <strong>124 hospitals</strong></span><select class="sort-s"><option>Most Relevant</option><option>Best Success Rate</option><option>Highest Rated</option><option>Price: Low</option></select></div>
+  <div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px;background:var(--black)">
+    <div class="rcard" onclick="showPage('detail')">
+      <div class="rcard-top"><div class="rcard-logo" style="background:linear-gradient(135deg,#0369a1,#0ea5e9)">🏥</div><div style="flex:1;min-width:0"><div class="rcard-name">Nova IVF Fertility</div><div class="rcard-city">📍 Andheri East, Mumbai · Est. 2008</div><div style="display:flex;gap:4px;flex-wrap:wrap"><span class="tag tag-b">✓ NABH</span><span class="tag tag-g">Featured</span></div></div><div style="text-align:right;flex-shrink:0"><div class="rcard-sr">72.5%</div><div class="rcard-sr-label">Success</div></div></div>
+      <div class="srbar"><span class="srbar-label">IVF Under 35</span><div class="srbar-track"><div class="srbar-fill" style="width:72%"></div></div><span class="srbar-val">72%</span></div>
+      <div class="rcard-mets"><div class="rm"><div class="rm-val">⭐ 4.6</div><div class="rm-label">Rating</div></div><div class="rm"><div class="rm-val" style="color:#34d399">12.5K+</div><div class="rm-label">Cycles</div></div><div class="rm"><div class="rm-val">₹1.2L</div><div class="rm-label">From</div></div></div>
+      <div class="rcard-btns"><button class="btn-wa" onclick="event.stopPropagation();window.open('https://wa.me/918000000000','_blank')">💬 WhatsApp</button><button class="btn-book-dark" onclick="event.stopPropagation();showPage('detail')">View & Book →</button></div>
+    </div>
+    <div class="rcard" onclick="showPage('detail')">
+      <div class="rcard-top"><div class="rcard-logo" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">🌸</div><div style="flex:1;min-width:0"><div class="rcard-name">Cloudnine Fertility</div><div class="rcard-city">📍 Jayanagar, Bangalore · Est. 2007</div><div style="display:flex;gap:4px;flex-wrap:wrap"><span class="tag tag-b">✓ JCI</span><span class="tag tag-b">✓ NABH</span></div></div><div style="text-align:right;flex-shrink:0"><div class="rcard-sr">68.3%</div><div class="rcard-sr-label">Success</div></div></div>
+      <div class="srbar"><span class="srbar-label">IVF Under 35</span><div class="srbar-track"><div class="srbar-fill" style="width:68%"></div></div><span class="srbar-val">68%</span></div>
+      <div class="rcard-mets"><div class="rm"><div class="rm-val">⭐ 4.4</div><div class="rm-label">Rating</div></div><div class="rm"><div class="rm-val" style="color:#34d399">8.2K+</div><div class="rm-label">Cycles</div></div><div class="rm"><div class="rm-val">₹1.4L</div><div class="rm-label">From</div></div></div>
+      <div class="rcard-btns"><button class="btn-wa" onclick="event.stopPropagation()">💬 WhatsApp</button><button class="btn-book-dark" onclick="event.stopPropagation();showPage('detail')">View & Book →</button></div>
+    </div>
+    <div class="rcard" onclick="showPage('detail')">
+      <div class="rcard-top"><div class="rcard-logo" style="background:linear-gradient(135deg,#e11d48,#fb7185)">💊</div><div style="flex:1;min-width:0"><div class="rcard-name">Oasis Fertility Centre</div><div class="rcard-city">📍 Banjara Hills, Hyderabad</div><div style="display:flex;gap:4px;flex-wrap:wrap"><span class="tag tag-b">✓ NABH</span><span class="tag tag-g">✓ ISAR</span></div></div><div style="text-align:right;flex-shrink:0"><div class="rcard-sr">70.1%</div><div class="rcard-sr-label">Success</div></div></div>
+      <div class="srbar"><span class="srbar-label">IVF Under 35</span><div class="srbar-track"><div class="srbar-fill" style="width:70%"></div></div><span class="srbar-val">70%</span></div>
+      <div class="rcard-mets"><div class="rm"><div class="rm-val">⭐ 4.5</div><div class="rm-label">Rating</div></div><div class="rm"><div class="rm-val" style="color:#34d399">9.8K+</div><div class="rm-label">Cycles</div></div><div class="rm"><div class="rm-val">₹1.1L</div><div class="rm-label">From</div></div></div>
+      <div class="rcard-btns"><button class="btn-wa" onclick="event.stopPropagation()">💬 WhatsApp</button><button class="btn-book-dark" onclick="event.stopPropagation();showPage('detail')">View & Book →</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER SHEET -->
+<div class="sheet-ov" id="filterSheet" onclick="if(event.target===this)closeSheet()">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-hdr"><div class="sh-title">Filters</div><button class="sh-close" onclick="closeSheet()">✕</button></div>
+    <div class="sh-body">
+      <div class="fsec">Treatment Type</div>
+      <div class="fchips"><div class="fchip sel">IVF</div><div class="fchip">IUI</div><div class="fchip">ICSI</div><div class="fchip">Egg Donation</div><div class="fchip">FET</div><div class="fchip">Surrogacy</div></div>
+      <div class="fsec">City</div>
+      <div class="fchips"><div class="fchip sel">Mumbai</div><div class="fchip">Delhi</div><div class="fchip">Bangalore</div><div class="fchip">Hyderabad</div><div class="fchip">Chennai</div><div class="fchip">Pune</div></div>
+      <div class="fsec">Minimum Success Rate</div>
+      <div class="fchips"><div class="fchip">Any</div><div class="fchip sel">60%+</div><div class="fchip">70%+</div><div class="fchip">75%+</div></div>
+      <div class="fsec">Budget</div>
+      <div class="fchips"><div class="fchip">Any</div><div class="fchip">Under ₹1L</div><div class="fchip sel">₹1–2L</div><div class="fchip">₹2–3L</div><div class="fchip">₹3L+</div></div>
+      <div class="fsec" style="margin-top:4px">Accreditation</div>
+      <div class="togrow"><span class="togrow-label">NABH Accredited</span><div class="tog on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="togrow"><span class="togrow-label">JCI Accredited</span><div class="tog" onclick="this.classList.toggle('on')"></div></div>
+      <div class="togrow"><span class="togrow-label">ISO 9001:2015</span><div class="tog" onclick="this.classList.toggle('on')"></div></div>
+    </div>
+    <div class="sh-footer">
+      <button class="btn-reset" onclick="closeSheet()">Reset</button>
+      <button class="btn-apply" onclick="closeSheet();showToast('✓ Filters applied — 124 results')">Apply Filters</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DETAIL PAGE ═══ -->
+<div id="page-detail" class="page" style="padding-top:0;position:relative">
+  <button onclick="showPage('search')" style="position:fixed;top:68px;left:10px;z-index:50;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);color:var(--text);border:1px solid var(--b);border-radius:9px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer">← Back</button>
+  <div class="detail-cover" style="background:linear-gradient(160deg,#0c4a6e,#0ea5e9)">
+    <div class="dc-emoji">🏥</div>
+    <div class="dc-overlay"></div>
+    <div class="dc-content">
+      <div style="display:flex;align-items:flex-end;gap:12px">
+        <div style="width:56px;height:56px;border-radius:15px;background:var(--white);display:flex;align-items:center;justify-content:center;font-size:24px;border:2px solid rgba(255,255,255,.2);flex-shrink:0">🏥</div>
+        <div><div class="dc-name">Nova IVF Fertility</div><div class="dc-sub"><span>📍 Andheri East, Mumbai</span><span>🏆 NABH</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="detail-actions">
+    <button class="btn-book-dark" onclick="showPage('book')">📅 Book</button>
+    <button class="btn-wa" style="border-radius:10px;padding:11px;font-size:13px">💬 WhatsApp</button>
+    <button style="width:40px;height:40px;background:rgba(255,255,255,.06);border:1px solid var(--b);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer" onclick="toggleSave(this)">♡</button>
+  </div>
+  <div class="qs-row">
+    <div class="qs"><div class="qs-val" style="color:#34d399">72.5%</div><div class="qs-label">Success</div></div>
+    <div class="qs"><div class="qs-val" style="color:#38bdf8">12.5K</div><div class="qs-label">Cycles</div></div>
+    <div class="qs"><div class="qs-val" style="color:#fbbf24">4.6⭐</div><div class="qs-label">Rating</div></div>
+    <div class="qs"><div class="qs-val">₹1.2L</div><div class="qs-label">From</div></div>
+  </div>
+  <div class="dtab-scroll">
+    <div class="dtab active" onclick="switchDTab(this,'dt-ov')">Overview</div>
+    <div class="dtab" onclick="switchDTab(this,'dt-doc')">Doctors (8)</div>
+    <div class="dtab" onclick="switchDTab(this,'dt-rev')">Reviews (2.3K)</div>
+    <div class="dtab" onclick="switchDTab(this,'dt-trt')">Treatments</div>
+  </div>
+  <!-- Overview -->
+  <div id="dt-ov" class="dt-content">
+    <div class="info-block">
+      <div class="info-block-title">📊 IVF Success Rates 2023</div>
+      <div class="sr-row"><div class="sr-top"><span class="sr-label">Under 35 years</span><span class="sr-val">72%</span></div><div class="sr-track"><div class="sr-fill" style="width:72%"></div></div></div>
+      <div class="sr-row"><div class="sr-top"><span class="sr-label">35–39 years</span><span class="sr-val">61%</span></div><div class="sr-track"><div class="sr-fill" style="width:61%"></div></div></div>
+      <div class="sr-row"><div class="sr-top"><span class="sr-label">40–42 years</span><span class="sr-val orange">44%</span></div><div class="sr-track"><div class="sr-fill sr-fill-o" style="width:44%"></div></div></div>
+      <div style="margin-top:9px;font-size:10px;color:var(--tm)">✅ Verified by FERTY9 Medical Team · Jan 2024</div>
+    </div>
+    <div class="info-block">
+      <div class="info-block-title">ℹ️ About</div>
+      <p style="font-size:13px;color:var(--td);line-height:1.7">Nova IVF is India's leading fertility chain with 60+ centers nationally. Our team has helped over 1,00,000 couples achieve parenthood through IVF, IUI, ICSI and advanced reproductive techniques.</p>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:11px"><span class="tag tag-b">✓ NABH</span><span class="tag tag-o">ISO 9001</span><span class="tag tag-g">ISAR Member</span></div>
+    </div>
+    <div class="info-block">
+      <div class="info-block-title">📞 Contact</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--td)"><div>📞 022-48858600</div><div>✉️ contact@novaivf.com</div><div>📍 Andheri East, Mumbai – 400069</div></div>
+    </div>
+  </div>
+  <!-- Doctors -->
+  <div id="dt-doc" class="dt-content" style="display:none">
+    <div class="doc-card"><div class="doc-photo" style="background:linear-gradient(135deg,#38bdf8,#0369a1)">HP</div><div class="doc-info"><div class="doc-name">Dr. Hrishikesh Pai</div><div class="doc-spec">Senior Fertility Specialist</div><div class="doc-quals"><span class="qual">MBBS</span><span class="qual">MD</span><span class="qual">Fellowship London</span></div><div class="doc-stats"><div><div class="ds-val g">76.3%</div><div class="ds-label">Success</div></div><div><div class="ds-val">15K+</div><div class="ds-label">Patients</div></div><div><div class="ds-val">35 yrs</div><div class="ds-label">Exp</div></div></div></div><button class="doc-btn" onclick="showPage('book')">Book</button></div>
+    <div class="doc-card"><div class="doc-photo" style="background:linear-gradient(135deg,#a78bfa,#7c3aed)">AS</div><div class="doc-info"><div class="doc-name">Dr. Asha Sharma</div><div class="doc-spec">IVF Specialist & Embryologist</div><div class="doc-quals"><span class="qual">MBBS</span><span class="qual">DNB</span></div><div class="doc-stats"><div><div class="ds-val g">68.9%</div><div class="ds-label">Success</div></div><div><div class="ds-val">8.2K+</div><div class="ds-label">Patients</div></div><div><div class="ds-val">18 yrs</div><div class="ds-label">Exp</div></div></div></div><button class="doc-btn" onclick="showPage('book')">Book</button></div>
+  </div>
+  <!-- Reviews -->
+  <div id="dt-rev" class="dt-content" style="display:none">
+    <div class="rev-card"><div class="rev-hdr"><div class="rev-av" style="background:#38bdf8">PS</div><div style="flex:1"><div class="rev-name">Priya Sharma</div><div class="rev-meta">Mumbai · Nov 2023</div></div><div class="outcome">🎉 Success</div></div><div style="color:#fbbf24;font-size:12px;margin-bottom:7px">★★★★★</div><div class="rev-title">"After 3 failed cycles, Nova IVF gave us our miracle"</div><div class="rev-text">Dr. Pai's team identified what others had missed. Incredibly supportive. We're now proud parents!</div><div class="rev-footer"><span class="rev-type">💊 IVF with ICSI · 2 cycles</span><button class="helpful">👍 42</button></div></div>
+    <div class="rev-card"><div class="rev-hdr"><div class="rev-av" style="background:#a78bfa">RK</div><div style="flex:1"><div class="rev-name">Rahul & Kavita M.</div><div class="rev-meta">Pune · Oct 2023</div></div><div class="outcome">🎉 Success</div></div><div style="color:#fbbf24;font-size:12px;margin-bottom:7px">★★★★★</div><div class="rev-title">"Transparent pricing, exceptional care"</div><div class="rev-text">No hidden charges, clear explanation of every step. Pregnant on our first cycle!</div><div class="rev-footer"><span class="rev-type">💊 Standard IVF · 1 cycle</span><button class="helpful">👍 38</button></div></div>
+  </div>
+  <!-- Treatments -->
+  <div id="dt-trt" class="dt-content" style="display:none">
+    <div class="info-block"><div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:6px">IVF — Standard Protocol</div><p style="font-size:12px;color:var(--td);margin-bottom:11px">Complete IVF cycle — stimulation, retrieval, fertilization & transfer.</p><div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:18px;font-weight:800;color:var(--white);letter-spacing:-1px">₹1.2L – ₹1.8L</div><div style="font-size:10px;color:var(--tm)">4–6 weeks · 70.5% success</div></div><button class="btn-book-dark" style="width:auto;padding:9px 16px;font-size:12px;border-radius:9px" onclick="showPage('book')">Book</button></div></div>
+    <div class="info-block"><div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:6px">IVF with ICSI</div><p style="font-size:12px;color:var(--td);margin-bottom:11px">Single sperm injection — ideal for male factor infertility.</p><div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:18px;font-weight:800;color:var(--white);letter-spacing:-1px">₹1.5L – ₹2.2L</div><div style="font-size:10px;color:var(--tm)">4–6 weeks · 72.3% success</div></div><button class="btn-book-dark" style="width:auto;padding:9px 16px;font-size:12px;border-radius:9px" onclick="showPage('book')">Book</button></div></div>
+  </div>
+</div>
+
+<!-- ═══ BOOK PAGE ═══ -->
+<div id="page-book" class="page" style="padding-top:60px;padding-bottom:0">
+  <div class="book-hdr">
+    <button class="back-btn" onclick="showPage('detail')">← Back</button>
+    <div style="font-size:11px;font-weight:600;color:var(--tm)">Step 2 of 4</div>
+  </div>
+  <div class="bk-hosp"><div class="bk-logo">🏥</div><div><div class="bk-name">Nova IVF Fertility</div><div class="bk-city">📍 Andheri East, Mumbai</div></div></div>
+  <div class="bk-step-bar">
+    <div class="bks"><div class="bks-dot bks-done">✓</div><div class="bks-label" style="color:var(--green)">Info</div></div>
+    <div class="bks"><div class="bks-dot bks-active">2</div><div class="bks-label" style="color:var(--brand)">Schedule</div></div>
+    <div class="bks"><div class="bks-dot bks-wait">3</div><div class="bks-label">Payment</div></div>
+    <div class="bks"><div class="bks-dot bks-wait">4</div><div class="bks-label">Done</div></div>
+  </div>
+  <div class="bk-body">
+    <div class="form-group"><label class="form-label">Doctor (Optional)</label><select class="form-input"><option>Any Available Doctor</option><option selected>Dr. Hrishikesh Pai — ₹1,500</option><option>Dr. Asha Sharma — ₹1,200</option></select></div>
+    <div class="form-group"><label class="form-label">Treatment *</label><select class="form-input"><option selected>IVF (In Vitro Fertilization)</option><option>IUI</option><option>ICSI</option><option>Initial Consultation</option></select></div>
+    <div class="form-group"><label class="form-label">Date *</label><input type="date" class="form-input" value="2024-12-15"></div>
+    <div class="form-group">
+      <label class="form-label">Time Slot *</label>
+      <div class="time-grid">
+        <div class="tslot taken">09:00</div><div class="tslot taken">09:30</div><div class="tslot active">10:00</div><div class="tslot">10:30</div>
+        <div class="tslot">11:00</div><div class="tslot taken">11:30</div><div class="tslot">14:00</div><div class="tslot">14:30</div>
+      </div>
+      <div style="margin-top:7px;font-size:10px;color:var(--tm)">⬛ Booked &nbsp; ⬜ Available &nbsp; 🟦 Selected</div>
+    </div>
+    <div class="form-group"><label class="form-label">Notes</label><textarea class="form-input" rows="2" placeholder="Any specific concerns…" style="resize:none"></textarea></div>
+    <div class="pay-box">
+      <div style="font-size:11px;font-weight:700;color:var(--tm);margin-bottom:9px;text-transform:uppercase;letter-spacing:.05em">Payment Summary</div>
+      <div class="pay-row"><span>Consultation Fee</span><span>₹1,500</span></div>
+      <div class="pay-row"><span>Platform Fee</span><span>Free</span></div>
+      <div class="pay-row pay-total"><span>Total</span><span>₹1,500</span></div>
+    </div>
+  </div>
+  <div class="bk-footer">
+    <button class="btn-pay" onclick="confirmBooking()">🔒 Pay ₹1,500 & Confirm</button>
+    <div class="secure-note">🔒 Secured by Razorpay · 100% refundable if cancelled 24hrs before</div>
+  </div>
+</div>
+
+<!-- ═══ AUTH PAGE ═══ -->
+<div id="page-auth" class="page" style="background:var(--black)">
+  <div style="padding:16px 0">
+    <div class="auth-card">
+      <div class="auth-top">
+        <div class="auth-logo-row">
+          <div class="logo-icon"><svg viewBox="0 0 24 24" fill="black" width="16" height="16"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px;color:var(--white);letter-spacing:-1.5px;display:flex;align-items:center">FERTY<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--white);color:var(--black);border-radius:5px;font-size:12px;font-weight:900;margin-left:2px">9</span></div>
+        </div>
+        <div class="auth-title">Create Account</div>
+        <div class="auth-sub">Start your fertility journey with confidence</div>
+      </div>
+      <div class="role-pick">
+        <div class="rpick active" onclick="pickRole(this)"><div class="rpick-icon">👨‍👩‍👧</div><div class="rpick-label">Patient</div></div>
+        <div class="rpick" onclick="pickRole(this)"><div class="rpick-icon">🏥</div><div class="rpick-label">Hospital</div></div>
+        <div class="rpick" onclick="pickRole(this)"><div class="rpick-icon">👨‍⚕️</div><div class="rpick-label">Doctor</div></div>
+      </div>
+      <div class="auth-form">
+        <div class="form-group"><label class="form-label">Full Name *</label><input type="text" class="form-input" placeholder="Your full name"></div>
+        <div class="form-group"><label class="form-label">Email *</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+        <div class="form-group"><label class="form-label">Mobile *</label><div class="phone-row"><div class="phone-code">🇮🇳 +91</div><input type="tel" class="form-input" placeholder="10-digit number"></div></div>
+        <div class="form-group"><label class="form-label">Password *</label><input type="password" class="form-input" placeholder="Min 8 chars, 1 uppercase, 1 number"></div>
+        <div class="check-row"><div class="check-box">✓</div><span class="check-label">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span></div>
+        <button class="btn-pay" style="margin-bottom:0" onclick="showToast('✅ Account created! Please verify your email.')">Create Account →</button>
+        <div class="or-div">or continue with</div>
+        <div class="social-btns"><button class="social-btn">G&nbsp; Google</button><button class="social-btn">📱&nbsp; Phone OTP</button></div>
+        <div class="auth-footer-txt">Already have an account? <a href="#" onclick="showToast('Sign in flow coming soon!')">Sign in</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DASHBOARD PAGE ═══ -->
+<div id="page-dashboard" class="page" style="background:var(--black)">
+  <div class="dash-greet">
+    <div class="dash-title">Good morning, Priya 👋</div>
+    <div class="dash-sub">Your fertility journey · Dec 2024</div>
+  </div>
+  <div class="container">
+    <div class="dash-stats">
+      <div class="dsbox"><div class="dsb-icon">📅</div><div class="dsb-val">3</div><div class="dsb-label">Appointments</div><div class="dsb-change dsb-up">↑ 1 upcoming</div></div>
+      <div class="dsbox"><div class="dsb-icon">❤️</div><div class="dsb-val">7</div><div class="dsb-label">Saved Hospitals</div><div class="dsb-change dsb-up">↑ 2 added</div></div>
+      <div class="dsbox"><div class="dsb-icon">⭐</div><div class="dsb-val">1</div><div class="dsb-label">Reviews</div><div class="dsb-change" style="color:var(--tm)">1 pending</div></div>
+      <div class="dsbox"><div class="dsb-icon">🔔</div><div class="dsb-val">3</div><div class="dsb-label">Notifications</div><div class="dsb-change dsb-dn">3 unread</div></div>
+    </div>
+    <div class="dash-widget">
+      <div class="dw-hdr"><div class="dw-title">📅 My Appointments</div><span class="dw-link">View all</span></div>
+      <div class="appt-item"><div class="appt-av" style="background:#38bdf8">NI</div><div style="flex:1"><div class="appt-name">Nova IVF Fertility</div><div class="appt-detail">Dr. Hrishikesh Pai · Dec 15 · 10:00 AM</div></div><span class="appt-status s-conf">Confirmed</span></div>
+      <div class="appt-item"><div class="appt-av" style="background:#a78bfa">CF</div><div style="flex:1"><div class="appt-name">Cloudnine Fertility</div><div class="appt-detail">Dr. Priya Selvaraj · Nov 28 · 11:30 AM</div></div><span class="appt-status s-pend">Pending</span></div>
+      <div class="appt-item"><div class="appt-av" style="background:#fb7185">OF</div><div style="flex:1"><div class="appt-name">Oasis Fertility</div><div class="appt-detail">Oct 10 · 3:00 PM</div></div><span class="appt-status s-done">Done</span></div>
+    </div>
+    <div class="dash-widget">
+      <div class="dw-hdr"><div class="dw-title">🔔 Notifications</div><span class="dw-link" onclick="showToast('All notifications marked as read')">Mark read</span></div>
+      <div class="notif-item"><div class="ndot nd-b"></div><div style="flex:1"><div class="notif-text">Appointment at <strong style="color:var(--text)">Nova IVF</strong> confirmed for Dec 15</div><div class="notif-time">2 hours ago</div></div></div>
+      <div class="notif-item"><div class="ndot nd-g"></div><div style="flex:1"><div class="notif-text">Reminder: Appointment tomorrow at <strong style="color:var(--text)">Cloudnine</strong></div><div class="notif-time">1 day ago</div></div></div>
+      <div class="notif-item"><div class="ndot nd-r"></div><div style="flex:1"><div class="notif-text">Leave a review for <strong style="color:var(--text)">Oasis Fertility</strong></div><div class="notif-time">3 days ago</div></div></div>
+    </div>
+    <button class="btn-white" onclick="showPage('search')" style="margin-bottom:10px">🔍 Find More Hospitals</button>
+    <button class="btn-outline" onclick="showPage('saved')">❤️ View Saved Hospitals</button>
+  </div>
+</div>
+
+<!-- ═══ SAVED PAGE ═══ -->
+<div id="page-saved" class="page" style="background:var(--black)">
+  <div class="container" style="padding-top:4px">
+    <div style="margin-bottom:20px"><div style="font-size:20px;font-weight:800;color:var(--white);letter-spacing:-1px;margin-bottom:2px">❤️ Saved Hospitals</div><div style="font-size:12px;color:var(--tm)">7 hospitals saved</div></div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="rcard" onclick="showPage('detail')">
+        <div class="rcard-top"><div class="rcard-logo" style="background:linear-gradient(135deg,#0369a1,#0ea5e9)">🏥</div><div style="flex:1;min-width:0"><div class="rcard-name">Nova IVF Fertility</div><div class="rcard-city">📍 Mumbai · NABH Verified</div><div style="display:flex;gap:4px"><span class="tag tag-b">✓ NABH</span></div></div><button onclick="event.stopPropagation();this.closest('.rcard').style.opacity='.3';showToast('Removed from saved')" style="width:33px;height:33px;background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.25);border-radius:8px;color:#f87171;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer">♥</button></div>
+        <div class="rcard-mets"><div class="rm"><div class="rm-val" style="color:#34d399">72.5%</div><div class="rm-label">Success</div></div><div class="rm"><div class="rm-val">⭐ 4.6</div><div class="rm-label">Rating</div></div><div class="rm"><div class="rm-val">₹1.2L</div><div class="rm-label">From</div></div></div>
+        <div class="rcard-btns"><button class="btn-wa" onclick="event.stopPropagation()">💬 WhatsApp</button><button class="btn-book-dark" onclick="event.stopPropagation();showPage('book')">Book →</button></div>
+      </div>
+      <div class="rcard" onclick="showPage('detail')">
+        <div class="rcard-top"><div class="rcard-logo" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">🌸</div><div style="flex:1;min-width:0"><div class="rcard-name">Cloudnine Fertility</div><div class="rcard-city">📍 Bangalore · JCI Verified</div><div style="display:flex;gap:4px"><span class="tag tag-b">✓ JCI</span></div></div><button onclick="event.stopPropagation();this.closest('.rcard').style.opacity='.3';showToast('Removed from saved')" style="width:33px;height:33px;background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.25);border-radius:8px;color:#f87171;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer">♥</button></div>
+        <div class="rcard-mets"><div class="rm"><div class="rm-val" style="color:#34d399">68.3%</div><div class="rm-label">Success</div></div><div class="rm"><div class="rm-val">⭐ 4.4</div><div class="rm-label">Rating</div></div><div class="rm"><div class="rm-val">₹1.4L</div><div class="rm-label">From</div></div></div>
+        <div class="rcard-btns"><button class="btn-wa" onclick="event.stopPropagation()">💬 WhatsApp</button><button class="btn-book-dark" onclick="event.stopPropagation();showPage('book')">Book →</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COMPARE PAGE ═══ -->
+<div id="page-compare" class="page" style="background:var(--black)">
+  <div class="container" style="padding-top:4px">
+    <div style="margin-bottom:4px"><div style="font-size:20px;font-weight:800;color:var(--white);letter-spacing:-1px;margin-bottom:2px">⚖️ Compare</div><div style="font-size:12px;color:var(--tm)">Swipe right to see all columns</div></div>
+  </div>
+  <div class="cmp-wrap">
+    <div class="cmp-table">
+      <div class="cmp-hrow">
+        <div class="cmp-h" style="border-left:none;text-align:left;font-size:10px;font-weight:600;color:var(--tm);text-transform:uppercase;letter-spacing:.06em">Feature</div>
+        <div class="cmp-h"><div class="cmp-hlogo" style="background:linear-gradient(135deg,#0369a1,#0ea5e9)">🏥</div><div class="cmp-hname">Nova IVF</div><div class="cmp-hcity">Mumbai</div><div class="cmp-best">Best Overall</div></div>
+        <div class="cmp-h"><div class="cmp-hlogo" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">🌸</div><div class="cmp-hname">Cloudnine</div><div class="cmp-hcity">Bangalore</div></div>
+        <div class="cmp-h"><div class="cmp-hlogo" style="background:linear-gradient(135deg,#e11d48,#fb7185)">💊</div><div class="cmp-hname">Oasis</div><div class="cmp-hcity">Hyderabad</div></div>
+      </div>
+      <div class="cmp-row"><div class="cmp-label">Success Rate</div><div class="cmp-val best">72.5% 🏆</div><div class="cmp-val">68.3%</div><div class="cmp-val">70.1%</div></div>
+      <div class="cmp-row"><div class="cmp-label">Rating</div><div class="cmp-val best">4.6 ★</div><div class="cmp-val">4.4 ★</div><div class="cmp-val">4.5 ★</div></div>
+      <div class="cmp-row"><div class="cmp-label">IVF Price</div><div class="cmp-val bb">₹1.2L</div><div class="cmp-val">₹1.4L</div><div class="cmp-val best">₹1.1L 🏆</div></div>
+      <div class="cmp-row"><div class="cmp-label">NABH</div><div class="cmp-val"><span class="cmp-chk">✓</span></div><div class="cmp-val"><span class="cmp-chk">✓</span></div><div class="cmp-val"><span class="cmp-chk">✓</span></div></div>
+      <div class="cmp-row"><div class="cmp-label">JCI</div><div class="cmp-val"><span class="cmp-x">✗</span></div><div class="cmp-val"><span class="cmp-chk">✓</span></div><div class="cmp-val"><span class="cmp-x">✗</span></div></div>
+      <div class="cmp-row"><div class="cmp-label">Egg Donation</div><div class="cmp-val"><span class="cmp-chk">✓</span></div><div class="cmp-val"><span class="cmp-chk">✓</span></div><div class="cmp-val"><span class="cmp-chk">✓</span></div></div>
+      <div class="cmp-row"><div class="cmp-label">Surrogacy</div><div class="cmp-val"><span class="cmp-chk">✓</span></div><div class="cmp-val"><span class="cmp-chk">✓</span></div><div class="cmp-val"><span class="cmp-x">✗</span></div></div>
+      <div class="cmp-row" style="border-bottom:none"><div class="cmp-label"></div><div class="cmp-val" style="padding:9px 5px"><button class="btn-book-dark" style="font-size:11px;padding:8px 5px;border-radius:7px;width:100%" onclick="showPage('book')">Book</button></div><div class="cmp-val" style="padding:9px 5px"><button style="width:100%;background:var(--g8);color:var(--tm);border:1px solid var(--b);border-radius:7px;padding:8px 5px;font-size:11px;font-weight:600;cursor:pointer" onclick="showPage('book')">Book</button></div><div class="cmp-val" style="padding:9px 5px"><button style="width:100%;background:var(--g8);color:var(--tm);border:1px solid var(--b);border-radius:7px;padding:8px 5px;font-size:11px;font-weight:600;cursor:pointer" onclick="showPage('book')">Book</button></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PRICING PAGE ═══ -->
+<div id="page-pricing" class="page" style="background:var(--g9)">
+  <div class="container" style="padding-top:4px">
+    <div class="sec-eyebrow">For Hospitals</div>
+    <div style="font-size:26px;font-weight:800;color:var(--white);letter-spacing:-2px;margin-bottom:5px">Subscription Plans</div>
+    <div style="font-size:13px;color:var(--td);margin-bottom:0">Start free, grow with us.</div>
+    <div class="pricing-toggle">
+      <div class="pt active">Monthly</div>
+      <div class="pt" onclick="this.classList.add('active');this.previousElementSibling.classList.remove('active')">Annual <span style="color:var(--green);font-weight:700">−17%</span></div>
+    </div>
+    <div class="pcard"><div class="pcard-tier">Free</div><div class="pcard-price"><sup>₹</sup>0</div><div class="pcard-period">Forever free</div><ul class="pcard-features"><li class="pf"><span class="pf-chk">✓</span>Basic hospital profile</li><li class="pf"><span class="pf-chk">✓</span>Up to 2 doctors listed</li><li class="pf"><span class="pf-chk">✓</span>Up to 5 photos</li><li class="pf" style="opacity:.4"><span class="pf-x">✗</span>Success rate display</li><li class="pf" style="opacity:.4"><span class="pf-x">✗</span>Analytics access</li></ul><button class="btn-plan bpd">Get Started Free</button></div>
+    <div class="pcard"><div class="pcard-tier">Basic</div><div class="pcard-price"><sup>₹</sup>2,999</div><div class="pcard-period">per month</div><ul class="pcard-features"><li class="pf"><span class="pf-chk">✓</span>Everything in Free</li><li class="pf"><span class="pf-chk">✓</span>Up to 5 doctors</li><li class="pf"><span class="pf-chk">✓</span>20 photos + 2 videos</li><li class="pf"><span class="pf-chk">✓</span>Success rate display</li><li class="pf"><span class="pf-chk">✓</span>WhatsApp button</li></ul><button class="btn-plan bpo">Start Basic</button></div>
+    <div class="pcard popular"><div class="pop-badge">⭐ MOST POPULAR</div><div class="pcard-tier" style="color:#38bdf8">Premium</div><div class="pcard-price"><sup>₹</sup>7,999</div><div class="pcard-period">per month</div><ul class="pcard-features"><li class="pf"><span class="pf-chk">✓</span>Everything in Basic</li><li class="pf"><span class="pf-chk">✓</span>Unlimited doctors & photos</li><li class="pf"><span class="pf-chk">✓</span>10 video testimonials</li><li class="pf"><span class="pf-chk">✓</span>Featured in search results</li><li class="pf"><span class="pf-chk">✓</span>Advanced analytics</li><li class="pf"><span class="pf-chk">✓</span>Appointment management</li></ul><button class="btn-plan bpw">Start Premium →</button></div>
+    <div class="pcard" style="background:var(--black);border-color:rgba(255,255,255,.1)"><div class="pcard-tier">Enterprise</div><div class="pcard-price"><sup>₹</sup>24,999</div><div class="pcard-period">per month</div><ul class="pcard-features"><li class="pf"><span class="pf-chk">✓</span>Everything in Premium</li><li class="pf"><span class="pf-chk">✓</span>Homepage featured slot</li><li class="pf"><span class="pf-chk">✓</span>Dedicated account manager</li><li class="pf"><span class="pf-chk">✓</span>Multi-branch support</li><li class="pf"><span class="pf-chk">✓</span>API access</li></ul><button class="btn-plan bpd" onclick="showToast('Sales team will contact you soon!')">Contact Sales</button></div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bnav">
+  <div class="bi active" id="bnav-home" onclick="showPage('home')"><div class="bi-icon">🏠</div><div class="bi-label">Home</div></div>
+  <div class="bi" id="bnav-search" onclick="showPage('search')"><div class="bi-icon">🔍</div><div class="bi-label">Search</div></div>
+  <div class="bi" id="bnav-compare" onclick="showPage('compare')"><div class="bi-icon">⚖️</div><div class="bi-label">Compare</div></div>
+  <div class="bi" id="bnav-dashboard" onclick="showPage('dashboard')" style="position:relative"><div class="bi-icon" style="position:relative;display:inline-block">📊<span class="bi-badge" style="position:absolute">3</span></div><div class="bi-label">Account</div></div>
+  <div class="bi" id="bnav-pricing" onclick="showPage('pricing')"><div class="bi-icon">💳</div><div class="bi-label">Plans</div></div>
+</nav>
+
+<!-- WhatsApp FAB -->
+<a class="waf" href="https://wa.me/918000000000?text=Hi%2C+I+found+you+on+FERTY9" target="_blank" rel="noopener">💬</a>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+const pages=['home','search','detail','book','auth','dashboard','compare','pricing','saved'];
+const navMap={home:'bnav-home',search:'bnav-search',compare:'bnav-compare',dashboard:'bnav-dashboard',pricing:'bnav-pricing',saved:'bnav-dashboard'};
+
+function showPage(id){
+  pages.forEach(p=>{const el=document.getElementById('page-'+p);if(el)el.classList.remove('active');});
+  const t=document.getElementById('page-'+id);
+  if(t){t.classList.add('active');window.scrollTo({top:0,behavior:'instant'});}
+  const footer=document.getElementById('app-footer');
+  if(footer)footer.style.display=id==='home'?'block':'none';
+  document.querySelectorAll('.bi').forEach(i=>i.classList.remove('active'));
+  if(navMap[id]){const n=document.getElementById(navMap[id]);if(n)n.classList.add('active');}
+}
+function toggleSave(btn){
+  const saved=btn.textContent==='♥';
+  btn.textContent=saved?'♡':'♥';
+  btn.style.color=saved?'':'#f43f5e';
+  showToast(saved?'Removed from saved':'❤️ Saved to favourites!');
+}
+function openSheet(){document.getElementById('filterSheet').classList.add('open');document.body.style.overflow='hidden';}
+function closeSheet(){document.getElementById('filterSheet').classList.remove('open');document.body.style.overflow='';}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+function confirmBooking(){
+  showToast('✅ Confirmed! Check your email & SMS.');
+  setTimeout(()=>showPage('dashboard'),1200);
+}
+function pickRole(el){
+  document.querySelectorAll('.rpick').forEach(r=>r.classList.remove('active'));
+  el.classList.add('active');
+}
+function switchDTab(el,tabId){
+  document.querySelectorAll('.dtab').forEach(t=>{t.classList.remove('active');});
+  el.classList.add('active');
+  ['dt-ov','dt-doc','dt-rev','dt-trt'].forEach(id=>{
+    const e=document.getElementById(id);if(e)e.style.display='none';
+  });
+  const target=document.getElementById(tabId);
+  if(target)target.style.display='block';
+}
+document.querySelectorAll('.fchip').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('sel')));
+document.querySelectorAll('.tslot:not(.taken)').forEach(s=>s.addEventListener('click',function(){
+  document.querySelectorAll('.tslot').forEach(x=>x.classList.remove('active'));
+  this.classList.add('active');
+}));
+window.addEventListener('scroll',()=>{
+  document.getElementById('hdr').classList.toggle('scrolled',window.scrollY>20);
+},{passive:true});
+
+// ── THEME TOGGLE ──
+function toggleTheme(){
+  const html = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  const meta = document.getElementById('theme-color-meta');
+  const isDark = html.getAttribute('data-theme') === 'dark';
+
+  if(isDark){
+    html.setAttribute('data-theme','light');
+    btn.textContent = '☀️';
+    btn.title = 'Switch to Dark Mode';
+    btn.style.background = 'rgba(0,0,0,.06)';
+    if(meta) meta.content = '#f0f2f5';
+    try{ localStorage.setItem('ferty9-theme','light'); }catch(e){}
+  } else {
+    html.setAttribute('data-theme','dark');
+    btn.textContent = '🌙';
+    btn.title = 'Switch to Light Mode';
+    btn.style.background = 'transparent';
+    if(meta) meta.content = '#000000';
+    try{ localStorage.setItem('ferty9-theme','dark'); }catch(e){}
+  }
+}
+
+// Restore saved theme on load
+(function(){
+  try{
+    const saved = localStorage.getItem('ferty9-theme');
+    if(saved === 'light'){
+      document.documentElement.setAttribute('data-theme','light');
+      const btn = document.getElementById('theme-toggle');
+      if(btn){ btn.textContent='☀️'; btn.style.background='rgba(0,0,0,.06)'; btn.title='Switch to Dark Mode'; }
+      const meta = document.getElementById('theme-color-meta');
+      if(meta) meta.content = '#f0f2f5';
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
